@@ -15,22 +15,5 @@
 # If you lost the GNU General Public License that ships with this software
 # repository (read the 'LICENSE' file), see <http://www.gnu.org/licenses/>.
 
-"""Packaged conftest shim."""
-
-# (lb): When I split dob into multiple projects, I moved the fixtures to
-# the furthest class upstream (dob-bright) which we glob back in to
-# conftest like they were originally. This is at the expense of violating
-# best practices, and the linter's good graces. But then we also don't
-# have to class out all the fixtures in the import statement, which for
-# some reason seems like an anti-pattern in pytest (import? just put it
-# all in conftest.py, we'll import that silently for you, why not).
-
-from dob_bright.tests.conftest import *  # noqa: F401, F403
-
-pytest_plugins = (
-    # Set KeyChainedValue._envvar_prefix.
-    'tests.config.envvar_prefix',
-    # Call app_dirs.register_application.
-    'tests.config.init_app_dirs',
-)
+"""Tests for ``dob_prompt/config`` modules."""
 

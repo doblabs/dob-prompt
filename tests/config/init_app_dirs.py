@@ -15,22 +15,11 @@
 # If you lost the GNU General Public License that ships with this software
 # repository (read the 'LICENSE' file), see <http://www.gnu.org/licenses/>.
 
-"""Packaged conftest shim."""
+from easy_as_pypi_apppth.app_dirs import register_application
 
-# (lb): When I split dob into multiple projects, I moved the fixtures to
-# the furthest class upstream (dob-bright) which we glob back in to
-# conftest like they were originally. This is at the expense of violating
-# best practices, and the linter's good graces. But then we also don't
-# have to class out all the fixtures in the import statement, which for
-# some reason seems like an anti-pattern in pytest (import? just put it
-# all in conftest.py, we'll import that silently for you, why not).
+from dob_prompt import __package_name__
 
-from dob_bright.tests.conftest import *  # noqa: F401, F403
-
-pytest_plugins = (
-    # Set KeyChainedValue._envvar_prefix.
-    'tests.config.envvar_prefix',
-    # Call app_dirs.register_application.
-    'tests.config.init_app_dirs',
-)
+# Register the appname used by AppDirs, which figures into the
+# user file paths, such as ~/.config/dob/dob.conf.
+register_application('test__' + __package_name__)
 
