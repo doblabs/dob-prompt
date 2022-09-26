@@ -64,6 +64,7 @@ help-main:
 	@echo "   coverage        check code coverage quickly with the default Python"
 	@echo "   coverage-html   generate HTML coverage reference for every source file"
 	@echo "   docs            generate Sphinx HTML documentation, including API docs"
+	@echo "   help            print helpful list of commands (this list)"
 	@echo "   isort           run isort; sorts and groups imports in every module"
 	@echo "   lint            check style with flake8"
 	@echo "   test            run tests quickly with the default Python"
