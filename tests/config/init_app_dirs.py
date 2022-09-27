@@ -15,7 +15,7 @@
 # If you lost the GNU General Public License that ships with this software
 # repository (read the 'LICENSE' file), see <http://www.gnu.org/licenses/>.
 
-from easy_as_pypi_apppth.app_dirs import register_application
+from easy_as_pypi_appdirs.app_dirs import register_application
 
 from dob_prompt import __package_name__
 

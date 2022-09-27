@@ -28,8 +28,8 @@ from prompt_toolkit.history import FileHistory, InMemoryHistory
 from prompt_toolkit.key_binding import KeyBindings
 from prompt_toolkit.shortcuts import CompleteStyle
 
-from easy_as_pypi_apppth import AppDirs
-from easy_as_pypi_apppth.expand_and_mkdirs import must_ensure_appdirs_path
+from easy_as_pypi_appdirs import AppDirs
+from easy_as_pypi_appdirs.expand_and_mkdirs import must_ensure_appdirs_path
 
 from dob_bright.helpers.path import touch
 
