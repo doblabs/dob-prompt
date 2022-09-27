@@ -57,7 +57,7 @@ factory-boy >= 2.12.0
 pytest-factoryboy >= 2.0.3
 
 # - "package that generates fake data for you"
-#   https://github.com/FactoryBoy/factory_boy
+#   https://github.com/joke2k/faker
 Faker >= 4.0.0
 #
 # - "Faker integration with the pytest framework."
