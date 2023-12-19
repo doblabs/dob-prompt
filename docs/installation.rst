@@ -2,8 +2,7 @@
 Installation
 ############
 
-.. |dob-prompt| replace:: ``dob-prompt``
-.. _dob-prompt: https://github.com/tallybark/dob-prompt
+.. vim:tw=0:ts=3:sw=3:et:norl:nospell:ft=rst
 
 .. |virtualenv| replace:: ``virtualenv``
 .. _virtualenv: https://virtualenv.pypa.io/en/latest/
@@ -11,41 +10,37 @@ Installation
 .. |workon| replace:: ``workon``
 .. _workon: https://virtualenvwrapper.readthedocs.io/en/latest/command_ref.html?highlight=workon#workon
 
-To install system-wide, run as superuser:
+To install system-wide, run as superuser::
 
-.. code-block:: sh
+    $ pip3 install dob-prompt
 
-   $ pip3 install dob-prompt
-
-To install user-local, simply run:
-
-.. code-block:: sh
+To install user-local, simply run::
 
     $ pip3 install -U dob-prompt
 
-To install within a |virtualenv|_, try:
+To install within a |virtualenv|_, try::
 
-.. code-block:: sh
+    $ cd "$(mktemp -d)"
 
-    $ mkvirtualenv dob-prompt
-    (dob-prompt) $ pip3 install dob-prompt
+    $ python3 -m venv .venv
 
-To develop on the project, link to the source files instead:
+    $ . ./.venv/bin/activate
 
-.. code-block:: sh
+    (dob-prompt) $ pip install dob-prompt
+
+To develop on the project, link to the source files instead::
 
     (dob-prompt) $ deactivate
-    $ rmvirtualenv dob-prompt
-    $ git clone git@github.com:tallybark/dob-prompt.git
+    $ git clone git@github.com:doblabs/dob-prompt.git
     $ cd dob-prompt
-    $ mkvirtualenv -a $(pwd) --python=/usr/bin/python3.6 dob-prompt
+    $ python3 -m venv dob-prompt
+    $ . ./.venv/bin/activate
     (dob-prompt) $ make develop
 
-After creating the virtual environment,
-to start developing from a fresh terminal, run |workon|_:
+After creating the virtual environment, it's easy to start
+developing from a fresh terminal::
 
-.. code-block:: sh
-
-    $ workon dob-prompt
+    $ cd dob-prompt
+    $ . ./.venv/bin/activate
     (dob-prompt) $ ...
 
