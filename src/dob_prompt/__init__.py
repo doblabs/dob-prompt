@@ -33,6 +33,10 @@ __arg0name__ = os.path.basename(sys.argv[0])
 
 __package_name__ = 'dob-prompt'
 
+# This version is substituted on poetry-build by poetry-dynamic-versioning.
+# - Consequently, __version__ remains empty when installed in 'editable' mode.
+__version__ = ""
+
 
 def get_version(include_head=False):
     return _get_version(
