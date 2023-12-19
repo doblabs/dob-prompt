@@ -21,5 +21,4 @@ from dob_prompt import __package_name__
 
 # Register the appname used by AppDirs, which figures into the
 # user file paths, such as ~/.config/dob/dob.conf.
-register_application('test__' + __package_name__)
-
+register_application("test__" + __package_name__)

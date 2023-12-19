@@ -19,14 +19,11 @@ from .prompt_actegory import PromptForActegory
 from .prompt_tagcloud import PromptForMoreTags
 from .prompter_common import PrompterCommon
 
-__all__ = (
-    'AwesomePrompt',
-)
+__all__ = ("AwesomePrompt",)
 
 
 class AwesomePrompt(PrompterCommon):
-    """
-    """
+    """ """
 
     def __init__(self, controller):
         super(AwesomePrompt, self).__init__()
@@ -38,4 +35,3 @@ class AwesomePrompt(PrompterCommon):
 
     def ask_for_tags(self, *args, **kwargs):
         return self.prompt_for_tags.ask_for_tags(*args, **kwargs)
-

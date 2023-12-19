@@ -29,8 +29,7 @@ from dob_bright.tests.conftest import *  # noqa: F401, F403
 
 pytest_plugins = (
     # Set KeyChainedValue._envvar_prefix.
-    'tests.config.envvar_prefix',
+    "tests.config.envvar_prefix",
     # Call app_dirs.register_application.
-    'tests.config.init_app_dirs',
+    "tests.config.init_app_dirs",
 )
-

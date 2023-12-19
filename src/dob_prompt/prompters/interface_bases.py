@@ -16,15 +16,14 @@
 # repository (read the 'LICENSE' file), see <http://www.gnu.org/licenses/>.
 
 __all__ = (
-    'InterfaceBuilder',
-    'InterfaceSection',
-    'InterfaceStyle',
+    "InterfaceBuilder",
+    "InterfaceSection",
+    "InterfaceStyle",
 )
 
 
 class InterfaceStyle(object):
-    """
-    """
+    """ """
 
     @property
     def color_1(self):
@@ -40,8 +39,7 @@ class InterfaceStyle(object):
 
 
 class InterfaceSection(object):
-    """
-    """
+    """ """
 
     def __init__(self, colors=None):
         self.colors = colors
@@ -54,7 +52,7 @@ class InterfaceSection(object):
     def reset(self, parts=None, unfmt=None):
         parts_unfmt = (self.parts, self.unfmt)
         self.parts = parts or []
-        self.unfmt = unfmt or ''
+        self.unfmt = unfmt or ""
         self._max_width = None
         return parts_unfmt
 
@@ -85,11 +83,11 @@ class InterfaceSection(object):
     # ***
 
     def __str__(self):
-        return (
-            'parts: {} / unfmt: {} / col: {} / max_w: {}'
-            .format(
-                self.parts, self.unfmt, self.colors, self._max_width,
-            )
+        return "parts: {} / unfmt: {} / col: {} / max_w: {}".format(
+            self.parts,
+            self.unfmt,
+            self.colors,
+            self._max_width,
         )
 
     # ***
@@ -110,13 +108,18 @@ class InterfaceSection(object):
             text = text()
         bg = bg or self.color_1
         fg = fg or self.color_2
-        bold = ' bold' if bold else ''
-        italic = ' italic' if italic else ''
-        underline = ' underline' if underline else ''
+        bold = " bold" if bold else ""
+        italic = " italic" if italic else ""
+        underline = " underline" if underline else ""
         part = (
-            'bg:#{bg} fg:#{fg}{bold}{italic}{underline}'.format(
-                bg=bg, fg=fg, bold=bold, italic=italic, underline=underline,
-            ), text,
+            "bg:#{bg} fg:#{fg}{bold}{italic}{underline}".format(
+                bg=bg,
+                fg=fg,
+                bold=bold,
+                italic=italic,
+                underline=underline,
+            ),
+            text,
         )
         self.add_part(part, text, prefix)
 
@@ -145,25 +148,25 @@ class InterfaceSection(object):
     # ***
 
     def render_edges_banner(self):
-        head = '┏━' if self.first else '┳━'
-        tail = '━┓' if self.last else '━'
-        self.justify_content(head, tail, '━')
+        head = "┏━" if self.first else "┳━"
+        tail = "━┓" if self.last else "━"
+        self.justify_content(head, tail, "━")
 
     def render_edges_bottom(self):
-        head = '┗━' if self.first else '┻━'
-        tail = '━┛' if self.last else '━'
-        self.justify_content(head, tail, '━')
+        head = "┗━" if self.first else "┻━"
+        tail = "━┛" if self.last else "━"
+        self.justify_content(head, tail, "━")
 
     def render_edges_middle(self):
-        head = '┃ '
-        tail = ' ┃' if self.last else ' '
-        return self.justify_content(head, tail, ' ')
+        head = "┃ "
+        tail = " ┃" if self.last else " "
+        return self.justify_content(head, tail, " ")
 
     def render_deadspace(self, term_width):
         avail = term_width - len(self.unfmt)
         if avail < 1:
             return
-        self.add_lamron(' ' * avail)
+        self.add_lamron(" " * avail)
 
     # ***
 
@@ -175,8 +178,8 @@ class InterfaceSection(object):
     def stretch_borders(self, head, tail, fill):
         avail = self.avail_width
         headed = head
-        headed += fill * int(avail / 2.)
-        tailed = fill * (avail - int(avail / 2.))
+        headed += fill * int(avail / 2.0)
+        tailed = fill * (avail - int(avail / 2.0))
         tailed += tail
         return headed, tailed
 
@@ -212,7 +215,7 @@ class InterfaceSection(object):
     # seems easier to keep the logic separate, but running truncate
     # as a post-processing operation. (Did I really need to explain
     # all this?)
-    def truncate(self, max_width, notice=''):
+    def truncate(self, max_width, notice=""):
         if not self.parts:
             return
         max_width_idx = self.idx_at_width(max_width)
@@ -231,17 +234,17 @@ class InterfaceSection(object):
         return idx_at_width
 
     def truncate_parts(self, notice, max_width, max_width_idx):
-        new_ending = '...{}'.format(notice)
+        new_ending = "...{}".format(notice)
         width_ending = len(new_ending)
         trun_width = max_width - width_ending
         self.truncate_parts_from(max_width_idx, trun_width, new_ending)
 
     def truncate_parts_from(self, max_width_idx, trun_width, new_ending):
-        unfmt_to_idx = ''.join([part[1] for part in self.parts[:max_width_idx + 1]])
+        unfmt_to_idx = "".join([part[1] for part in self.parts[: max_width_idx + 1]])
         rest = len(unfmt_to_idx) - trun_width
         assert rest > 0
         self.parts = self.truncate_parts_whittle(idx=max_width_idx, rest=rest)
-        self.unfmt = ''.join([part[1] for part in self.parts])
+        self.unfmt = "".join([part[1] for part in self.parts])
         self.add_normal(new_ending, italic=True)
 
     def truncate_parts_whittle(self, idx, rest):
@@ -266,8 +269,7 @@ class InterfaceSection(object):
 
 
 class InterfaceBuilder(object):
-    """
-    """
+    """ """
 
     def __init__(self, colors):
         self.colors = colors
@@ -284,4 +286,3 @@ class InterfaceBuilder(object):
         prev_section = self.sections[-1]
         section.prev_section = prev_section
         prev_section.next_section = section
-

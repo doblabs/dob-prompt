@@ -18,15 +18,14 @@
 from .interface_bases import InterfaceBuilder, InterfaceSection
 
 __all__ = (
-    'BannerBarBuilder',
+    "BannerBarBuilder",
     # Private:
     #   'BannerSection',
 )
 
 
 class BannerSection(InterfaceSection):
-    """
-    """
+    """ """
 
     def __init__(self, content, max_width, term_width=0, colors=None):
         super(BannerSection, self).__init__(colors=colors)
@@ -54,7 +53,7 @@ class BannerSection(InterfaceSection):
             self.italicize_and_underline(content, clean_spaces=True)
             self.render_edges_banner()
         else:
-            padded = ' {} '.format(content)
+            padded = " {} ".format(content)
             if idx == 1:
                 self.add_zinger(padded, bold=True)
             else:
@@ -73,25 +72,24 @@ class BannerSection(InterfaceSection):
             self.italicize_and_underline_clean(content)
 
     def italicize_and_underline_dirty(self, content):
-        self.add_zinger(' ')
+        self.add_zinger(" ")
         self.add_zinger(self.content, italic=True, underline=True)
-        self.add_zinger(' ')
+        self.add_zinger(" ")
 
     # (lb): Not sure what I like: underlined spaces in the title, or not.
     def italicize_and_underline_clean(self, content, noline_whitespace=False):
-        self.add_zinger(' ')
+        self.add_zinger(" ")
         if noline_whitespace:
-            for part in content.split(' '):
+            for part in content.split(" "):
                 self.add_zinger(part, italic=True, underline=True)
-                self.add_zinger(' ')
+                self.add_zinger(" ")
         else:
             self.add_zinger(content, italic=True, underline=True)
-            self.add_zinger(' ')
+            self.add_zinger(" ")
 
 
 class BannerBarBuilder(InterfaceBuilder):
-    """
-    """
+    """ """
 
     def __init__(self, colors, term_width=0):
         super(BannerBarBuilder, self).__init__(colors=colors)
@@ -115,7 +113,7 @@ class BannerBarBuilder(InterfaceBuilder):
             return self._parts
         for idx, section in enumerate(self.sections):
             self._parts += section.render(idx)
-            self._parts.append(('', '\n'))
+            self._parts.append(("", "\n"))
         if self._parts:
             # Instead of a blank line between the banner and the prompt,
             # show a hint or whatever message is pertinent.
@@ -128,4 +126,3 @@ class BannerBarBuilder(InterfaceBuilder):
     # rather than a simple prompt). See: BannerBarArea::cycle_help.
     def render_one(self, idx):
         return self.sections[idx].render(idx)
-

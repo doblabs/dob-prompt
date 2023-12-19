@@ -23,15 +23,15 @@ import sys
 from easy_as_pypi_getver import get_version as _get_version
 
 __all__ = (
-    'get_version',
-    '__arg0name__',
-    '__package_name__',
+    "get_version",
+    "__arg0name__",
+    "__package_name__",
 )
 
 # Note that this package is a library, so __arg0name__ likely, e.g., 'dob'.
 __arg0name__ = os.path.basename(sys.argv[0])
 
-__package_name__ = 'dob-prompt'
+__package_name__ = "dob-prompt"
 
 # This version is substituted on poetry-build by poetry-dynamic-versioning.
 # - Consequently, __version__ remains empty when installed in 'editable' mode.
@@ -44,4 +44,3 @@ def get_version(include_head=False):
         reference_file=__file__,
         include_head=include_head,
     )
-

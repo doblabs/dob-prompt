@@ -23,10 +23,9 @@ import apipkg
 apipkg.initpkg(
     __name__,
     {
-        'path': {
-            'AwesomePrompt': ".prompt__awesome:AwesomePrompt",
-            'PrompterCommon': ".prompter_common:PrompterCommon",
+        "path": {
+            "AwesomePrompt": ".prompt__awesome:AwesomePrompt",
+            "PrompterCommon": ".prompter_common:PrompterCommon",
         }
-    }
+    },
 )
-

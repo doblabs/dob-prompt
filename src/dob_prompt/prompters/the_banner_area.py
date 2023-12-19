@@ -19,6 +19,7 @@ from functools import update_wrapper
 
 from prompt_toolkit import print_formatted_text
 from prompt_toolkit.formatted_text import FormattedText
+
 # We override some basic bindings below to detect not standard event,
 # like the user pressing backspace on an already empty text field,
 # an event which PPT does not bother the validator with.
@@ -28,14 +29,11 @@ from prompt_toolkit.key_binding.bindings.named_commands import get_by_name
 
 from .interface_crown import BannerBarBuilder
 
-__all__ = (
-    'BannerBarArea',
-)
+__all__ = ("BannerBarArea",)
 
 
 class BannerBarArea(object):
-    """
-    """
+    """ """
 
     def __init__(self, prompt):
         self.prompt = prompt
@@ -90,10 +88,11 @@ class BannerBarArea(object):
         #                         mappings more generally. (There might be
         #                         a better use for Ctrl-\, or perhaps we'll
         #                         make key codes user-configurable.)
-        keycode = ('escape', 'h')
+        keycode = ("escape", "h")
 
         def handler(event):
             self.cycle_help(event)
+
         key_bindings.add(*keycode)(handler)
 
     # ***
@@ -112,7 +111,9 @@ class BannerBarArea(object):
                         basic_binding = get_by_name(named_command)
                         basic_binding.call(event)
                     return handled
+
                 return update_wrapper(_bubble_binding, func)
+
             return _bubble_basic_decorator
 
         @classmethod
@@ -120,16 +121,18 @@ class BannerBarArea(object):
             # cls is Decorators
             def _reset_timeouts_decorator(func, *args, **kwargs):
                 def _reset_timeouts_binding(event, *args, **kwargs):
-                    prompt.debug('_reset_timeouts_binding')
+                    prompt.debug("_reset_timeouts_binding")
                     prompt.reset_timeouts()
                     handled = func(event, *args, **kwargs)
-                    prompt.debug('_reset_timeouts_binding/handled: {}'.format(handled))
+                    prompt.debug("_reset_timeouts_binding/handled: {}".format(handled))
                     return handled
+
                 return update_wrapper(_reset_timeouts_binding, func)
+
             return _reset_timeouts_decorator
 
     def wire_hook_ctrl_z(self, key_bindings):
-        keycode = ('c-z',)
+        keycode = ("c-z",)
 
         # (lb): A purist might suggest that a Ctrl-z literally be echoed,
         # but I think frantic persons will appreciate an obvious recovery
@@ -137,6 +140,7 @@ class BannerBarArea(object):
         @BannerBarArea.Decorators.reset_timeouts(self.prompt)
         def handler(event):
             self.prompt.handle_content_reset(event)
+
         key_bindings.add(*keycode)(handler)
 
     def wire_hook_escape(self, key_bindings):
@@ -145,18 +149,19 @@ class BannerBarArea(object):
         # Escape presses did not solve it, e.g., keycode = ('escape', 'escape',).
         # - But if user presses *three* Escapes in a row, then this is called
         #   before the timeout.
-        keycode = ('escape',)
+        keycode = ("escape",)
 
         @BannerBarArea.Decorators.reset_timeouts(self.prompt)
         def handler(event):
             self.prompt.handle_escape_dismiss(event)
+
         key_bindings.add(*keycode)(handler)
 
     # Wire all three related Backspace bindings: Backspace, Ctrl-Backspace, Ctrl-h.
     def wire_hook_backspace(self, key_bindings):
         # Note that POSIX reports Ctrl-Backspace as '\x08', just like Ctrl-h.
         # And a lone Backspace is '\x7f', but PPT says key 'c-h', like C-BS and C-h.
-        keycode = ('c-h',)  # Aka ('backspace',)
+        keycode = ("c-h",)  # Aka ('backspace',)
 
         @BannerBarArea.Decorators.reset_timeouts(self.prompt)
         def handler(event):
@@ -164,13 +169,13 @@ class BannerBarArea(object):
             # (lb): I think it's a terminal issue, and not something we can change.
             # - Backspace: KeyPress(key='c-h', data='\x7f')
             # - C-BS, C-h: KeyPress(key='c-h', data='\x08')
-            if event.data == '\x7f':
+            if event.data == "\x7f":
                 # Backspace
                 handled = self.prompt.handle_backspace_delete_char(event)
                 # Kick basic binding.
-                decor = BannerBarArea.Decorators.bubble_binding('backward-delete-char')
+                decor = BannerBarArea.Decorators.bubble_binding("backward-delete-char")
                 decor(lambda event: handled)(event)
-            elif event.data == '\x08':
+            elif event.data == "\x08":
                 # MAYBE: (lb): Would there ever be a case where someone absolutely
                 # must use Ctrl-h to delete single characters? If not, I'd like to
                 # make use Ctrl-Backspace/Ctrl-h for delete all, because I never
@@ -184,16 +189,17 @@ class BannerBarArea(object):
         key_bindings.add(*keycode)(handler)
 
     def wire_hook_ctrl_w(self, key_bindings):
-        keycode = ('c-w',)
+        keycode = ("c-w",)
 
-        @BannerBarArea.Decorators.bubble_binding('unix-word-rubout')
+        @BannerBarArea.Decorators.bubble_binding("unix-word-rubout")
         @BannerBarArea.Decorators.reset_timeouts(self.prompt)
         def handler(event):
             return self.prompt.handle_word_rubout(event)
+
         key_bindings.add(*keycode)(handler)
 
     def wire_hook_ctrl_l(self, key_bindings):
-        keycode = ('c-l',)
+        keycode = ("c-l",)
 
         # The basic binding clears the screen, including our banner!
         # - So override to just clear the input line.
@@ -202,6 +208,7 @@ class BannerBarArea(object):
         @BannerBarArea.Decorators.reset_timeouts(self.prompt)
         def handler(event):
             self.prompt.handle_clear_screen(event)
+
         key_bindings.add(*keycode)(handler)
 
     # SKIP: ('delete',), ('c-delete',), and ('c-d',).
@@ -209,45 +216,48 @@ class BannerBarArea(object):
     # and is not interesting to us.
 
     def wire_hook_ctrl_s(self, key_bindings):
-        keycode = ('c-s',)
+        keycode = ("c-s",)
 
         # The basic binding performs same action in emacs or vi mode,
         # search.start_forward_incremental_search, but that feature
         # seems not as useful as provider left-handed (per QWERTY)
         # method to save (to complement right-handed ENTER option).
-        @BannerBarArea.Decorators.bubble_binding('accept-line')
+        @BannerBarArea.Decorators.bubble_binding("accept-line")
         @BannerBarArea.Decorators.reset_timeouts(self.prompt)
         def handler(event):
             return self.prompt.handle_accept_line(event)
+
         key_bindings.add(*keycode)(handler)
 
     def wire_hook_ctrl_space(self, key_bindings):
-        keycode = ('c-space',)
+        keycode = ("c-space",)
 
         # (lb): Redundant? Both Ctrl-space and Ctrl-s are left-hand
         # accessible. Do we really need 2 left-hand accessible ENTERs?
-        @BannerBarArea.Decorators.bubble_binding('accept-line')
+        @BannerBarArea.Decorators.bubble_binding("accept-line")
         @BannerBarArea.Decorators.reset_timeouts(self.prompt)
         def handler(event):
             return self.prompt.handle_accept_line(event)
+
         key_bindings.add(*keycode)(handler)
 
     def wire_hook_enter(self, key_bindings):
-        keycode = ('enter',)
+        keycode = ("enter",)
 
         # The basic PPT 'enter' calls 'accept-line', which is mostly
         # already wired in our code to be what we want, except we use
         # a Validator gatekeeper that likes to raise ValidationError
         # hints. So we need to handle this situation ourselves, to get
         # around the validator.
-        @BannerBarArea.Decorators.bubble_binding('accept-line')
+        @BannerBarArea.Decorators.bubble_binding("accept-line")
         @BannerBarArea.Decorators.reset_timeouts(self.prompt)
         def handler(event):
             return self.prompt.handle_accept_line(event)
+
         key_bindings.add(*keycode)(handler)
 
     def wire_hook_tab(self, key_bindings):
-        keycode = ('c-i',)  # Aka 'tab'.
+        keycode = ("c-i",)  # Aka 'tab'.
 
         # (lb): First, I had considered hooking 'tab' (and calling the
         # 'menu-complete' basic binding if necessary) but I sometimes
@@ -263,16 +273,17 @@ class BannerBarArea(object):
         # cursor, but in the completions dropdown below the prompt, the first
         # entry is "Appointments". Hitting TAB, PPT defaults to completing
         # with "Appointments" and not "Pool Time", like one would expect!
-        @BannerBarArea.Decorators.bubble_binding('menu-complete')
+        @BannerBarArea.Decorators.bubble_binding("menu-complete")
         @BannerBarArea.Decorators.reset_timeouts(self.prompt)
         def handler(event):
             return self.prompt.handle_menu_complete(event)
+
         key_bindings.add(*keycode)(handler)
 
     def wire_hook_left(self, key_bindings):
-        keycode = ('left',)
+        keycode = ("left",)
 
-        @BannerBarArea.Decorators.bubble_binding('backward-char')
+        @BannerBarArea.Decorators.bubble_binding("backward-char")
         # Note that when the completion dropdown is showing, this handler
         # does not fire at all, so we use a Validator as a hacky way to
         # be sure to call reset_timeouts (because as the user left/right/
@@ -281,28 +292,31 @@ class BannerBarArea(object):
         @BannerBarArea.Decorators.reset_timeouts(self.prompt)
         def handler(event):
             return self.prompt.handle_backward_char(event)
+
         key_bindings.add(*keycode)(handler)
 
     def wire_hook_right(self, key_bindings):
-        keycode = ('right',)
+        keycode = ("right",)
 
-        @BannerBarArea.Decorators.bubble_binding('forward-char')
+        @BannerBarArea.Decorators.bubble_binding("forward-char")
         # See commend in wire_hook_left: 'right' not triggered when completions
         # dropdown showing, so separate wiring in place to call reset_timeouts
         # when the 'right' event is masked from us.
         @BannerBarArea.Decorators.reset_timeouts(self.prompt)
         def handler(event):
             return self.prompt.handle_forward_char(event)
+
         key_bindings.add(*keycode)(handler)
 
     def wire_hook_ctrl_q(self, key_bindings):
-        keycode = ('c-q',)
+        keycode = ("c-q",)
 
         # NO: @BannerBarArea.Decorators.reset_timeouts(self.prompt)
         # (Do not wrap with reset_timeouts because handle_exit_request
         # might set one of those timeouts, which we wouldn't want reset.)
         def handler(event):
             return self.prompt.handle_exit_request(event)
+
         key_bindings.add(*keycode)(handler)
 
     # ***
@@ -324,14 +338,14 @@ class BannerBarArea(object):
     @property
     def completion_hints(self):
         return [
-            'Press <Alt-h> for help.',
+            "Press <Alt-h> for help.",
         ]
 
     def assemble_hints(self):
         self.help_pages = (
             self.completion_hints
             + self.prompt.completion_hints
-            + ['']  # Cycle through to blank line.
+            + [""]  # Cycle through to blank line.
         )
 
     def help_section_text(self):
@@ -367,12 +381,11 @@ class BannerBarArea(object):
         event.app.renderer.output.cursor_backward(restore_column)
         # Hack-within-a-hack. Ask our banner builder to build us just the
         # row in question, and tell PPT to dump it where the cursor's at.
-        print_formatted_text(FormattedText(
-            self.builder.render_one(self.help_section_idx)
-        ))
+        print_formatted_text(
+            FormattedText(self.builder.render_one(self.help_section_idx))
+        )
         # Finally, restore the cursor. The print added a newline, so
         # the row is down one less than we moved up.
         relative_prompt_row = relative_help_row - 1
         event.app.renderer.output.cursor_down(relative_prompt_row)
         event.app.renderer.output.cursor_forward(restore_column)
-

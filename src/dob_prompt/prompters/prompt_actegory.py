@@ -32,7 +32,7 @@ from .sophisti_prompt import SophisticatedPrompt
 from .the_bottom_area import BottomBarArea
 
 __all__ = (
-    'PromptForActegory',
+    "PromptForActegory",
     # Private:
     #   'ActegoryCompleterSuggester',
     #   'ActegoryHackyProcessor',
@@ -41,16 +41,15 @@ __all__ = (
 
 
 class PromptForActegory(SophisticatedPrompt):
-    """
-    """
+    """ """
 
     def __init__(self, controller):
         super(PromptForActegory, self).__init__(controller)
         self.activities_cache = {}
         self.categories_cache = {}
 
-        self.activity = ''
-        self.category = ''
+        self.activity = ""
+        self.category = ""
         self.lock_act = False
 
         self.re_actegory = RegExpActegory(self.sep)
@@ -59,7 +58,7 @@ class PromptForActegory(SophisticatedPrompt):
 
     @property
     def sep(self):
-        return '@'
+        return "@"
 
     # ***
 
@@ -71,7 +70,7 @@ class PromptForActegory(SophisticatedPrompt):
 
     def boil_dry_on_backspace_if_text_empty(self, event):
         boiling_dry = not event.current_buffer.text
-        self.debug('boiling_dry: {}'.format(boiling_dry))
+        self.debug("boiling_dry: {}".format(boiling_dry))
         if boiling_dry:
             # PPT does not trigger validator unless text changes,
             # and text *is* empty -- before event consumed by PPT
@@ -83,7 +82,7 @@ class PromptForActegory(SophisticatedPrompt):
     def handle_backspace_delete_char(self, event):
         def _handle_backspace_delete_char():
             boiling_dry = self.boil_dry_on_backspace_if_text_empty(event)
-            self.debug('boiling_dry: {}'.format(boiling_dry))
+            self.debug("boiling_dry: {}".format(boiling_dry))
             if boiling_dry:
                 # The text is empty, so by pressing backspace, the user
                 # triggered a switch from Category input to Activity input.
@@ -95,7 +94,7 @@ class PromptForActegory(SophisticatedPrompt):
             # input context (Category → Activity → Category, etc.), regardless
             # of if text is empty of not.
             # (lb): I may change this behavior in the future, if it doesn't stick.
-            self.debug('posit: {}'.format(event.current_buffer.cursor_position))
+            self.debug("posit: {}".format(event.current_buffer.cursor_position))
             if event.current_buffer.cursor_position == 0:
                 # Cursor is all the way left... do it do it do it
                 # [switch from category mode to activity mode;
@@ -146,13 +145,13 @@ class PromptForActegory(SophisticatedPrompt):
             self.forget_category(event)
             return True
 
-        self.activity = ''
+        self.activity = ""
         self.forget_category(event)
         return True
 
     def handle_clear_screen(self, event):
-        self.activity = ''
-        self.forget_category(event, '')
+        self.activity = ""
+        self.forget_category(event, "")
         return True
 
     def handle_word_rubout(self, event):
@@ -161,7 +160,7 @@ class PromptForActegory(SophisticatedPrompt):
     def handle_accept_line(self, event):
         if not self.lock_act:
             text = event.current_buffer.text
-            self.debug('dissemble: text: {}'.format(text))
+            self.debug("dissemble: text: {}".format(text))
             set_act_cat = self.try_disassemble_parts(text)
             if set_act_cat:
                 # Bail now. Because false, our code will trigger PPT's
@@ -225,7 +224,7 @@ class PromptForActegory(SophisticatedPrompt):
     # ***
 
     def forget_category(self, event, new_text=None):
-        self.category = ''
+        self.category = ""
         self.reset_lock_act(event, new_text)
 
     def reset_lock_act(self, event, new_text=None):
@@ -255,20 +254,20 @@ class PromptForActegory(SophisticatedPrompt):
         what = self.edit_part_type.capitalize()
         # (lb): In addition to keys hinted, you can also Ctrl-SPACE. For now.
         if not self.lock_act:
-            what_hint = _('Enter the {} then hit ENTER or `@`').format(what)
+            what_hint = _("Enter the {} then hit ENTER or `@`").format(what)
         else:
-            what_hint = _('Enter the {} then hit ENTER or Ctrl-s').format(what)
+            what_hint = _("Enter the {} then hit ENTER or Ctrl-s").format(what)
         return what_hint
 
     def prompt_recreate_filled(self, max_col=0):
-        fake_prompt = '{}{}{}{}'.format(
+        fake_prompt = "{}{}{}{}".format(
             self.session_prompt_prefix,
             self.activity,
             self.sep,
             self.category,
         )
-        self.debug('fake_prompt: {}'.format(fake_prompt))
-        line_parts = [('', fake_prompt)]
+        self.debug("fake_prompt: {}".format(fake_prompt))
+        line_parts = [("", fake_prompt)]
         return line_parts
 
     # ***
@@ -283,9 +282,9 @@ class PromptForActegory(SophisticatedPrompt):
         if not self.lock_act:
             # (lb): Just say 'activity', and not
             # the more-correct 'activity@category'.
-            part_meta = _('activity')
+            part_meta = _("activity")
         else:
-            part_meta = _('category')
+            part_meta = _("category")
         return part_meta
 
     @property
@@ -298,21 +297,23 @@ class PromptForActegory(SophisticatedPrompt):
 
     @property
     def history_topic(self):
-        return 'actegory'
+        return "actegory"
 
     @property
     def type_request(self):
-        return _('Enter an Activity{}Category').format(self.sep)
+        return _("Enter an Activity{}Category").format(self.sep)
 
     @property
     def completion_hints(self):
         tags_hints = [
-            _('Type the Activity name or choose an Act{}Gory from the dropdown.'
-              ).format(self.sep),
-            _('Press ENTER to set the Activity (or type ‘{}’, or press Ctrl-s).'
-              ).format(self.sep),
-            _('Next, type the Category name, and then press ENTER or Ctrl-s.'),
-            _('Use arrow keys or press F9 to jump between Activity and Category.'),
+            _(
+                "Type the Activity name or choose an Act{}Gory from the dropdown."
+            ).format(self.sep),
+            _(
+                "Press ENTER to set the Activity (or type ‘{}’, or press Ctrl-s)."
+            ).format(self.sep),
+            _("Next, type the Category name, and then press ENTER or Ctrl-s."),
+            _("Use arrow keys or press F9 to jump between Activity and Category."),
         ]
         tags_hints += super(PromptForActegory, self).completion_hints
         return tags_hints
@@ -356,8 +357,8 @@ class PromptForActegory(SophisticatedPrompt):
 
     def lock_activity(self, activity, lock_act=False):
         self.session.layout.current_buffer.text = self.category
-        self.session.layout.current_buffer.cursor_position = (
-            len(self.session.layout.current_buffer.text)
+        self.session.layout.current_buffer.cursor_position = len(
+            self.session.layout.current_buffer.text
         )
         self.update_state(activity, self.category, lock_act=lock_act)
 
@@ -418,7 +419,7 @@ class PromptForActegory(SophisticatedPrompt):
                     self.clean_up_print_text_header()
 
     def prompt_for_actegory(self):
-        self.debug(_('{}@{}').format(self.activity, self.category))
+        self.debug(_("{}@{}").format(self.activity, self.category))
 
         if not self.lock_act:
             default = self.activity
@@ -448,7 +449,7 @@ class PromptForActegory(SophisticatedPrompt):
             validator=self.validator,
         )
 
-        self.debug('prompt done! / _result: {}'.format(_result))
+        self.debug("prompt done! / _result: {}".format(_result))
 
     # ***
 
@@ -535,7 +536,7 @@ class PromptForActegory(SophisticatedPrompt):
             return
 
         text = self.session.app.current_buffer.text
-        self.debug('dissemble: text: {}'.format(text))
+        self.debug("dissemble: text: {}".format(text))
         _set_act_cat = self.try_disassemble_parts(text)  # noqa: F841
 
     def try_disassemble_parts(self, text):
@@ -546,9 +547,12 @@ class PromptForActegory(SophisticatedPrompt):
             self.lock_activity(act_or_cat)
             return True
 
-        self.debug('!dissemble: lock? {} / act_or_cat: {}'.format(
-            self.lock_act, act_or_cat,
-        ))
+        self.debug(
+            "!dissemble: lock? {} / act_or_cat: {}".format(
+                self.lock_act,
+                act_or_cat,
+            )
+        )
 
         # Be sure to always consume the input, even if the user has not
         # finished (hit ENTER), so that a command like Ctrl-q can reliably
@@ -562,10 +566,7 @@ class PromptForActegory(SophisticatedPrompt):
 
     @property
     def changed_since_init(self):
-        return (
-            (self.activity != self.activity0)
-            or (self.category != self.category0)
-        )
+        return (self.activity != self.activity0) or (self.category != self.category0)
 
     def approve_exit_request(self):
         """Awesome Prompt Ctrl-q handler."""
@@ -579,8 +580,7 @@ class PromptForActegory(SophisticatedPrompt):
 
 
 class ActegoryCompleterSuggester(FactPartCompleterSuggester):
-    """
-    """
+    """ """
 
     def __init__(self, prompt, *args, **kwargs):
         super(ActegoryCompleterSuggester, self).__init__(*args, **kwargs)
@@ -590,7 +590,7 @@ class ActegoryCompleterSuggester(FactPartCompleterSuggester):
         name = item.name
         if not skip_category_name:
             try:
-                name = '{}{}{}'.format(
+                name = "{}{}{}".format(
                     self.escape_text(item.name),
                     self.prompt.sep,
                     self.escape_text(item.category.name),
@@ -605,8 +605,7 @@ class ActegoryCompleterSuggester(FactPartCompleterSuggester):
 
 
 class ActegoryHackyProcessor(HackyProcessor):
-    """
-    """
+    """ """
 
     def __init__(self, prompt):
         super(ActegoryHackyProcessor, self).__init__(prompt)
@@ -614,7 +613,7 @@ class ActegoryHackyProcessor(HackyProcessor):
         self.after_input = AfterInput(text=self.prompt.sep)
 
     def __repr__(self):
-        return 'ActegoryHackyProcessor(%r)' % (self.prompt)
+        return "ActegoryHackyProcessor(%r)" % (self.prompt)
 
     def apply_transformation(self, transformation_input):
         # Note that this method completely shadows the parent's
@@ -625,13 +624,13 @@ class ActegoryHackyProcessor(HackyProcessor):
 
         if self.prompt.lock_act:
             # Prefix the input with the Activity, e.g., "act@".
-            text = '{}{}'.format(self.prompt.activity, self.prompt.sep)
+            text = "{}{}".format(self.prompt.activity, self.prompt.sep)
             self.before_input.text = text
             return self.before_input.apply_transformation(transformation_input)
 
         elif self.prompt.category:
             # Follow the input with the Category, e.g., "@cat".
-            text = '{}{}'.format(self.prompt.sep, self.prompt.category)
+            text = "{}{}".format(self.prompt.sep, self.prompt.category)
             self.after_input.text = text
             return self.after_input.apply_transformation(transformation_input)
 
@@ -639,8 +638,7 @@ class ActegoryHackyProcessor(HackyProcessor):
 
 
 class ActegoryBottomBarArea(BottomBarArea):
-    """
-    """
+    """ """
 
     def __init__(self, prompt):
         super(ActegoryBottomBarArea, self).__init__(prompt)
@@ -648,9 +646,9 @@ class ActegoryBottomBarArea(BottomBarArea):
     @property
     def say_types(self):
         if not self.prompt.lock_act:
-            return _('Activities')
+            return _("Activities")
         else:
-            return _('Categories')
+            return _("Categories")
 
     def init_hooks_filter(self):
         def brief_scope(binding):
@@ -659,10 +657,10 @@ class ActegoryBottomBarArea(BottomBarArea):
         # Option to switch between cats and acts.
         self.filter_bindings = [
             KeyBond(
-                'f9',
+                "f9",
                 brief_scope,
                 action=self.toggle_scope,
-                briefs=[_('category'), _('activity')],
+                briefs=[_("category"), _("activity")],
                 highlight=True,
             ),
         ]
@@ -673,7 +671,7 @@ class ActegoryBottomBarArea(BottomBarArea):
     def extend_bottom(self, _builder, _dummy_section):
         # The Tag prompt adds a line, so add a blank one now,
         # so prompt height does not grow later.
-        return '\n'
+        return "\n"
 
 
 class ActegoryValidator(Validator):
@@ -694,7 +692,7 @@ class ActegoryValidator(Validator):
         text = document.text
         last_text = self.last_text
 
-        self.prompt.debug('text: {} / last_text: {}'.format(text, last_text))
+        self.prompt.debug("text: {} / last_text: {}".format(text, last_text))
 
         if self.last_text == text:
             # The text has not changed, which can happen when the user
@@ -738,10 +736,10 @@ class ActegoryValidator(Validator):
         # around. (lb): I have not tested what happens without this guard,
         # but I'd imagine chaos.
         if self.prompt.showing_completions:
-            self.prompt.debug('showing completions')
+            self.prompt.debug("showing completions")
             return
 
-        self.prompt.debug('dissemble: text: {}'.format(text))
+        self.prompt.debug("dissemble: text: {}".format(text))
         _set_act_cat = self.prompt.try_disassemble_parts(text)  # noqa: F841
 
         # Use ValidationError to show message in bottom-left of prompt
@@ -752,12 +750,11 @@ class ActegoryValidator(Validator):
         # very first character the user types, then don't bother any more.
         if not last_text:
             if not self.prompt.lock_act:
-                message = _('Type `{}` or press ENTER to finish {} name').format(
+                message = _("Type `{}` or press ENTER to finish {} name").format(
                     self.prompt.sep, self.prompt.edit_part_type.capitalize()
                 )
             else:
-                message = _('Type Ctrl-s or press ENTER to finish {} name').format(
+                message = _("Type Ctrl-s or press ENTER to finish {} name").format(
                     self.prompt.edit_part_type.capitalize()
                 )
             raise ValidationError(message=message, cursor_position=0)
-
