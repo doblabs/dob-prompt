@@ -16,7 +16,6 @@
 # repository (read the 'LICENSE' file), see <http://www.gnu.org/licenses/>.
 
 import pytest
-
 from prompt_toolkit.application.current import create_app_session
 from prompt_toolkit.input.defaults import create_pipe_input
 from prompt_toolkit.output import DummyOutput
@@ -25,7 +24,6 @@ from prompt_toolkit.output import DummyOutput
 from nark.tests.item_factories import *  # noqa: F401, F403
 
 from dob_prompt import prompters
-
 
 # FIXME/2020-01-31: (lb): Change all the key_sequence lists below!
 # - I copied this from dob-viewer/dob_viewer/tests/test_carousel.py
