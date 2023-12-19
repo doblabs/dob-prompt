@@ -15,6 +15,8 @@
 # If you lost the GNU General Public License that ships with this software
 # repository (read the 'LICENSE' file), see <http://www.gnu.org/licenses/>.
 
+from contextlib import closing
+
 import pytest
 from prompt_toolkit.application.current import create_app_session
 from prompt_toolkit.input.defaults import create_pipe_input
@@ -45,8 +47,7 @@ class TestBasicCarousel(object):
         mocker,
     ):
         inp_gen = create_pipe_input()
-        inp = next(inp_gen.gen)
-        try:
+        with closing(next(inp_gen.gen)) as inp:
             inp.send_text(input_text)
             with create_app_session(input=inp, output=DummyOutput()):
                 prompter = prompters.path.AwesomePrompt(controller_with_logging)
@@ -65,8 +66,6 @@ class TestBasicCarousel(object):
                     activity=activity,
                     no_completion=None,
                 )
-        finally:
-            inp.close()
 
     # ***
 
