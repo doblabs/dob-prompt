@@ -44,7 +44,8 @@ class TestBasicCarousel(object):
         activity,
         mocker,
     ):
-        inp = create_pipe_input()
+        inp_gen = create_pipe_input()
+        inp = next(inp_gen.gen)
         try:
             inp.send_text(input_text)
             with create_app_session(input=inp, output=DummyOutput()):
