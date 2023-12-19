@@ -552,7 +552,7 @@ class SophisticatedPrompt(PrompterCommon):
 
     def must_ensure_appdirs_path(self, **kwargs):
         try:
-            hist_path = must_ensure_appdirs_path(**kwargs)
+            _hist_path = must_ensure_appdirs_path(**kwargs)  # noqa: F841
         except Exception as err:
             self.update_pending = str(err)
 
