@@ -1,9 +1,0 @@
-# vim:tw=0:ts=2:sw=2:et:norl:ft=dosini
-
-# This file exists within 'dob-prompt':
-#
-#   https://github.com/tallybark/dob-prompt
-
-[run]
-source=dob_prompt
-
