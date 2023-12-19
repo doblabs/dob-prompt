@@ -16,13 +16,11 @@
 # repository (read the 'LICENSE' file), see <http://www.gnu.org/licenses/>.
 
 import time
-
 from gettext import gettext as _
 
-from prompt_toolkit.layout.processors import AfterInput, BeforeInput, Transformation
-from prompt_toolkit.validation import Validator, ValidationError
-
 from dob_bright.crud.enc_actegory_re import RegExpActegory
+from prompt_toolkit.layout.processors import AfterInput, BeforeInput, Transformation
+from prompt_toolkit.validation import ValidationError, Validator
 
 from .colors_terrific import TerrificColors1
 from .hacky_processor import HackyProcessor
