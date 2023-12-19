@@ -2,10 +2,10 @@
 
 # vim:tw=0:ts=4:sw=4:et:norl:ft=toml
 # Author: Landon Bouma <https://tallybark.com/>
-# Project: https://github.com/doblabs/easy-as-pypi#🥧
+# Project: https://github.com/doblabs/dob-prompt
 # License: MIT
 
-# Copyright (c) © 2020-2023 Landon Bouma. All Rights Reserved.
+# Copyright (c) © 2019-2023 Landon Bouma. All Rights Reserved.
 
 {% block project_meta -%}
 
@@ -13,36 +13,38 @@
 # REFER: https://peps.python.org/pep-0621/
 #   https://packaging.python.org/en/latest/specifications/declaring-project-metadata/
 
-name = "easy-as-pypi"
+name = "dob-prompt"
 version = "0.0.0"
-description = "Bootstrapping your next Python CLI made easy as PyPI"
+description = "journal and time tracker, supercharged for the terminal"
 
 authors = ["Landon Bouma <doblabs@tallybark.com>"]
 maintainers = ["Tally Bark LLC <doblabs@tallybark.com>"]
 
-license = "MIT"
+license = "GPLv3+"
 readme = "README.rst"
 
 # REFER: https://pypi.org/classifiers/
 classifiers = [
     "Development Status :: 5 - Production/Stable",
-    "Intended Audience :: Developers",
+    "Environment :: Console",
+    "Intended Audience :: End Users/Desktop",
     "Natural Language :: English",
     "Operating System :: OS Independent",
-    "Topic :: Software Development :: Libraries :: Application Frameworks",
+    "Topic :: Software Development :: Libraries :: Python Modules",
 ]
 
 # Keywords for PyPI to display, and to use for search results.
 keywords = [
-    "python",
-    "boilerplate",
-    "pyoilerplate",
-    "scaffolding",
-    "framework",
-    "CLI",
-    "TUI",
-    "skeleton",
-    "cookiecutter",
+    "journal",
+    "diary",
+    "timesheet",
+    "timetrack",
+    "jrnl",
+    "rednotebook",
+    "todo.txt",
+    "prjct",
+    "hamster",
+    "fact",
 ]
 
 # poetry build excludes __pycache__ dirs
@@ -70,18 +72,16 @@ include = [
 
 # ***
 
-# YOU: Disable this if your project derived from easy-as-pypi
-#      does not have a runnable script.
-#      - Otherwise set this to the package entry point.
-
-[tool.poetry.scripts]
-easy-as-pypi = "easy_as_pypi:cli"
+# YOU: Uncomment and customize to add a CLI entrypoint:
+#
+#   [tool.poetry.scripts]
+#   dob-prompt = "dob_prompt:cli"
 
 # ***
 
 [tool.easy_as_pypi]
 author = "Landon Bouma <https://tallybark.com/>"
-copy_years_owner = "2020-2023 Landon Bouma"
+copy_years_owner = "2019-2023 Landon Bouma"
 coc_contact_email = "tallybark+doblabs -at- gmail.com"
 
 # ***
@@ -107,41 +107,119 @@ coc_contact_email = "tallybark+doblabs -at- gmail.com"
 # WIRED: The Sphinx config (docs/conf.py) and .github/bin/update-poetry
 #        require that 'homepage' or 'repository' is set.
 
-homepage = "https://github.com/doblabs/easy-as-pypi#🥧"
+homepage = "https://github.com/doblabs/dob-prompt"
 
 # Include 'repository' unless same as homepage.
-#  repository = "https://github.com/doblabs/easy-as-pypi"
+#  repository = "https://github.com/doblabs/dob-prompt"
 
-history = "https://github.com/doblabs/easy-as-pypi/blob/release/HISTORY.rst"
+history = "https://github.com/doblabs/dob-prompt/blob/release/HISTORY.rst"
 
-documentation = "https://easy-as-pypi.readthedocs.io/en/latest"
+documentation = "https://dob-prompt.readthedocs.io/en/latest"
 
-issues = "https://github.com/doblabs/easy-as-pypi/issues"
+issues = "https://github.com/doblabs/dob-prompt/issues"
 
-download = "https://pypi.org/project/easy-as-pypi/#files"
+download = "https://pypi.org/project/dob-prompt/#files"
 
 {% endblock -%}
 
 {# +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #}
 
 {% block isort_known_third_party -%}
-    "click",
+    # *** External packages
+    "apipkg",
+    "inflector",
+    "prompt_toolkit",
+    # *** HOTH packages",
+    "easy_as_pypi_appdirs",
+    "easy_as_pypi_getver",
+    "pedantic_timedelta",
+    "nark",
+    "dob_bright",
 {%- endblock %}
 
 {# +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #}
 
 {% block deps_test_fakers_and_factories -%}
 
-# **** Fakers not needed.
+# **** See Fakers below.
+{% endblock -%}
+
+{% block project_test_dependencies -%}
+# *** Datetime testing
+
+# - "travel through time by mocking the datetime module"
+#
+#   https://github.com/spulec/freezegun
+freezegun = ">=0.3.14"
+
+# ***** Fakers and Factories
+
+# - "package that generates fake data for you"
+#
+#   https://pypi.org/project/Faker
+#   https://github.com/joke2k/faker
+Faker = ">=18.7.0"
+
+# - "Faker integration with the pytest framework."
+#
+#   https://pypi.org/project/pytest-faker
+#   https://github.com/pytest-dev/pytest-faker
+pytest-faker = ">=2.0.0"
+
+# - "Generates random data for your tests"
+#
+#   https://pypi.org/project/fauxfactory
+#   https://github.com/omaciel/fauxfactory
+fauxfactory = ">=3.1.0"
+
+# - ORM record generator / "test fixtures replacement for Python".
+#
+#   https://pypi.org/project/factory-boy
+#   https://github.com/FactoryBoy/factory_boy
+factory-boy = ">=3.2.1"
+
+# - "Factory Boy support for pytest"
+#
+#   https://pypi.org/project/pytest-factoryboy
+#   https://github.com/pytest-dev/pytest-factoryboy
+pytest-factoryboy = ">=2.5.1"
 {% endblock -%}
 
 {# +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #}
 
+{#
+    [tool.poetry.dependencies]
+ #}
+
 {% block project_dependencies -%}
 
-# - "Composable command line interface toolkit"
-#
-#   https://pypi.org/project/click
-#   https://github.com/pallets/click
-click = "^8.0.0"
+# https://github.com/pytest-dev/apipkg
+apipkg = "^1.5"
+# Vocabulary word pluralizer.
+#  https://github.com/ixmatus/inflector
+Inflector = "^3.0.1"
+# Amazing prompt library.
+# - Imports as prompt_toolkit.
+# https://github.com/prompt-toolkit/python-prompt-toolkit
+prompt-toolkit = "^3.0.5"
+
+# *** HOTH packages.
+
+# ActiveState/appdirs + Singleton (app-wide access w/out appname) + `mkdir -p`.
+#  https://github.com/doblabs/easy-as-pypi-appdirs#🛣
+easy-as-pypi-appdirs = ">0"
+# Get-package-or-Git-version helper.
+#  https://github.com/tallybark/easy-as-pypi-getver
+easy-as-pypi-getver = ">0"
+# Elapsed timedelta formatter, e.g., "1.25 days".
+# - Imports as `pedantic_timedelta`.
+# https://github.com/hotoffthehamster/human-friendly_pedantic-timedelta
+human-friendly_pedantic-timedelta = ">0"
+
+# The heart of Hamster. (Ye olde `hamster-lib`).
+#  https://github.com/tallybark/nark
+nark = ">0"
+# The controller, config, and common output and error tossing code.
+#  https://github.com/tallybark/dob-bright
+dob-bright = ">0"
 {% endblock %}
