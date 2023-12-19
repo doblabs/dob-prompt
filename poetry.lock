@@ -44,13 +44,13 @@ readthedocs = ["sphinx (>=6.2.1,<7.0.0)", "sphinx (>=7.2.6,<8.0.0)", "sphinx-rtd
 
 [[package]]
 name = "apipkg"
-version = "1.5"
+version = "3.0.2"
 description = "apipkg: namespace control and lazy-import mechanism"
 optional = false
-python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
+python-versions = ">=3.7"
 files = [
-    {file = "apipkg-1.5-py2.py3-none-any.whl", hash = "sha256:58587dd4dc3daefad0487f6d9ae32b4542b185e1c36db6993290e7c41ca2b47c"},
-    {file = "apipkg-1.5.tar.gz", hash = "sha256:37228cda29411948b422fae072f57e31d3396d2ee1c9783775980ee9c9990af6"},
+    {file = "apipkg-3.0.2-py3-none-any.whl", hash = "sha256:a16984c39de280701f3f6406ed3af658f2a1965011fe7bb5be34fbb48423b411"},
+    {file = "apipkg-3.0.2.tar.gz", hash = "sha256:c7aa61a4f82697fdaa667e70af1505acf1f7428b1c27b891d204ba7a8a3c5e0d"},
 ]
 
 [[package]]
@@ -2941,4 +2941,4 @@ readthedocs = ["sphinx", "sphinx", "sphinx-rtd-theme", "tomli"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.8.1"
-content-hash = "27cc29b2787b128ece6404358e81fc319196fc1237948c697cc86dc29e57c8bc"
+content-hash = "0b59a83af0eb708ace3054207a1b3de225e4ef6d45e5bdd412f311feb14f0ad0"
