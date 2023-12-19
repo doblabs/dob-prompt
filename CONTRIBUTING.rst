@@ -1,21 +1,22 @@
 ############
 Contributing
 ############
+.. vim:tw=0:ts=2:sw=2:et:norl:nospell:ft=rst
 
-.. |dob-prompt| replace:: ``dob-prompt``
-.. _dob-prompt: https://github.com/tallybark/dob-prompt
+.. |easy-as-pypi| replace:: ``dob-prompt``
+.. _easy-as-pypi: https://github.com/doblabs/easy-as-pypi
 
 .. |user-docs| replace:: user documentation
-.. _user-docs: https://github.com/tallybark/dob-prompt/tree/release/docs
+.. _user-docs: https://github.com/doblabs/easy-as-pypi/tree/release/docs
 
 .. |envlist| replace:: ``envlist``
-.. _envlist: https://tox.readthedocs.io/en/latest/config.html#conf-envlist
+.. _envlist: https://tox.wiki/en/latest/config.html#env_list
 
 .. |flake8| replace:: ``flake8``
-.. _flake8: http://flake8.pycqa.org/en/latest/
+.. _flake8: https://flake8.pycqa.org/en/latest/
 
 .. |isort| replace:: ``isort``
-.. _isort: https://github.com/timothycrosley/isort
+.. _isort: https://github.com/PyCQA/isort
 
 .. |pdb| replace:: ``pdb``
 .. _pdb: https://docs.python.org/3/library/pdb.html
@@ -24,7 +25,7 @@ Contributing
 .. _pytest: https://docs.pytest.org/en/latest/
 
 .. |tox| replace:: ``tox``
-.. _tox: https://tox.readthedocs.io/en/latest/
+.. _tox: https://tox.wiki/en/latest/
 
 .. |virtualenv| replace:: ``virtualenv``
 .. _virtualenv: https://virtualenv.pypa.io/en/latest/
@@ -33,7 +34,7 @@ Contributing
 .. _virtualenvwrapper: https://pypi.org/project/virtualenvwrapper/
 
 .. |PEP-257| replace:: PEP 257
-.. _PEP-257: https://www.python.org/dev/peps/pep-0257/
+.. _PEP-257: https://peps.python.org/pep-0257/
 
 .. |goog-py-sty| replace:: Google Python Style Guide
 .. _goog-py-sty: https://google.github.io/styleguide/pyguide.html#38-comments-and-docstrings
@@ -55,7 +56,7 @@ You can contribute in many ways:
 Report Bugs
 -----------
 
-Report bugs at https://github.com/tallybark/dob-prompt/issues.
+Report bugs at https://github.com/doblabs/easy-as-pypi/issues.
 
 When reporting a bug, please include:
 
@@ -85,9 +86,9 @@ us to improve it.
 
 This includes the official |user-docs|_,
 the `README
-<https://github.com/tallybark/dob-prompt/blob/release/README.rst>`__,
+<https://github.com/doblabs/easy-as-pypi/blob/release/README.rst>`__,
 and the inline docstrings that generate the `API documentation
-<https://dob-prompt.readthedocs.io/en/latest/modules.html>`__
+<https://easy-as-pypi.readthedocs.io/en/latest/modules.html>`__
 (per |PEP-257|_ and |goog-py-sty|_).
 
 We also appreciate reference from blog posts, articles, and other projects.
@@ -96,7 +97,7 @@ Submit Feedback
 ---------------
 
 The best way to send feedback is to file an issue at
-https://github.com/tallybark/dob-prompt/issues.
+https://github.com/doblabs/easy-as-pypi/issues.
 
 See above for reporting bugs.
 
@@ -120,12 +121,12 @@ questions or concerns. Response times may vary depending on season.
 Getting Started
 ===============
 
-Ready to contribute? Here's how to set up |dob-prompt|_
+Ready to contribute? Here's how to set up |easy-as-pypi|_
 for local development.
 
-1. Fork the |dob-prompt|_ repo on GitHub.
+1. Fork the |easy-as-pypi|_ repo on GitHub.
 
-   * Visit `<https://github.com/tallybark/dob-prompt>`__
+   * Visit `<https://github.com/doblabs/easy-as-pypi>`__
      and click *Fork*.
 
 2. Clone your fork locally.
@@ -133,51 +134,51 @@ for local development.
    Open a local terminal, change to a directory you'd like to develop from,
    and run the command::
 
-    $ git clone git@github.com:<your_login>/dob-prompt.git
+    $ git clone git@github.com:<your_login>/easy-as-pypi.git
 
-3. Install |dob-prompt|_ into a Python virtual instance,
+3. Install |easy-as-pypi|_ into a Python virtual instance,
    or |virtualenv|_.
 
    First, ensure that you have |virtualenvwrapper|_ installed.
 
    Next, set up a virtual environment for local development::
 
-    $ cd dob-prompt/
-    $ mkvirtualenv -a $(pwd) dob-prompt
-    (dob-prompt) $
+    $ cd easy-as-pypi/
+    $ mkvirtualenv -a $(pwd) easy-as-pypi
+    (easy-as-pypi) $
 
    *Note:* We use the ``-a`` option so that ``cdproject`` changes directories
-   to the ``dob-prompt/`` directory when we're in the virtual
+   to the ``easy-as-pypi/`` directory when we're in the virtual
    environment.
 
    Next, set up your fork for local development::
 
-    (dob-prompt) $ cdproject
-    (dob-prompt) $ make develop
+    (easy-as-pypi) $ cdproject
+    (easy-as-pypi) $ make develop
 
    *Hint:* As usual, run ``workon`` to activate the virtual environment, and
    ``deactivate`` to leave it. E.g.,::
 
     # Load the Python virtual instance.
-    $ workon dob-prompt
-    (dob-prompt) $
+    $ workon easy-as-pypi
+    (easy-as-pypi) $
 
     # Do your work.
-    (dob-prompt) $ ...
+    (easy-as-pypi) $ ...
 
     # Finish up.
-    (dob-prompt) $ deactivate
+    (easy-as-pypi) $ deactivate
     $
 
 4. Before starting work on a new feature or bug fix, make sure your
-   ``proving`` branch is up to date with the official branch::
+   ``develop`` branch is up to date with the official branch::
 
-    (dob-prompt) $ cdproject
-    (dob-prompt) $ git remote add upstream git@github.com:tallybark/dob-prompt.git
-    (dob-prompt) $ git fetch upstream
-    (dob-prompt) $ git checkout proving
-    (dob-prompt) $ git rebase upstream/proving
-    (dob-prompt) $ git push origin HEAD
+    (easy-as-pypi) $ cdproject
+    (easy-as-pypi) $ git remote add upstream git@github.com:doblabs/easy-as-pypi.git
+    (easy-as-pypi) $ git fetch upstream
+    (easy-as-pypi) $ git checkout develop
+    (easy-as-pypi) $ git rebase upstream/develop
+    (easy-as-pypi) $ git push origin HEAD
 
 5. Create a branch for local development. If you are working on an known issue,
    you may want to reference the Issue number in the branch name, e.g.,::
@@ -240,13 +241,13 @@ for local development.
      * ``Feedback: Fix something per PR feedback.``
 
      (You'll notice that this strategy is similar to
-     `gitmoji <https://gitmoji.carloscuesta.me/>`__,
+     `gitmoji <https://gitmoji.dev/>`__,
      but it's more concise, and less obtuse.)
 
 7. Throughout development, run tests and the linter -- and definitely before
    you submit a Pull Request.
 
-   |dob-prompt|_ uses
+   |easy-as-pypi|_ uses
    |flake8|_ for linting,
    |pytest|_ for unit testing, and
    |tox|_ for verifying against the many versions of Python.
@@ -343,16 +344,16 @@ for local development.
 
 10. Finally,
     `submit a pull request
-    <https://github.com/tallybark/dob-prompt/pulls>`_
+    <https://github.com/doblabs/easy-as-pypi/pulls>`_
     through the GitHub website.
 
-    *Important:* Please rebase your code against ``proving`` and resolve
+    *Important:* Please rebase your code against ``develop`` and resolve
     merge conflicts, so that the main project maintainer does not have
     to do so themselves. E.g.,::
 
      $ git checkout feature/ISSUE-123-name-of-your-issue
      $ git fetch upstream
-     $ git rebase upstream/proving
+     $ git rebase upstream/develop
      # Resolve any conflicts, then force-push.
      $ git push origin HEAD --force
      # And then open the Pull Request.
@@ -385,11 +386,6 @@ Before you submit a pull request, check that it meets these guidelines:
      (you can ignore or consider error handling branches less important to
      cover, but all branches would still be good to test!).
 
-     * Note that, as of early 2020, existing test coverage is no where near
-       100%, so take this guideline with a grain of salt. If existing code
-       coverage improves, the core developers will have more standing to
-       demand the same of contributed code.
-
 3. Commit sensibly.
 
    * Each commit should be succinct and singular in focus.
@@ -397,7 +393,7 @@ Before you submit a pull request, check that it meets these guidelines:
 
      __ rebase_and_squash_
 
-   * Rebase your work atop ``proving`` (as `mentioned above`__)
+   * Rebase your work atop develop (as `mentioned above`__)
      before creating the PR, or after making any requested
      changes.
 
@@ -426,27 +422,27 @@ will print a control character sequence to the terminal, rather than
 showing the last command you ran.)
 
 * If you want to interact with the code at runtime,
-  run ``py.test`` directly (see next).
+  run ``pytest`` directly (see next).
 
 If you'd like to break into a debugger when a test fails, run ``pytest``
 directly and have it start the interactive Python debugger on errors::
 
-    $ py.test --pdb tests/
+    $ pytest --pdb tests/
 
 If you'd like a more complete stack trace when a test fails, add verbosity::
 
-    $ py.test -v tests/
+    $ pytest -v tests/
 
     # Or, better yet, two vees!
-    $ py.test -vv tests/
+    $ pytest -vv tests/
 
 If you'd like to run a specific test, use ``-k``, as mentioned above. E.g.,::
 
-    $ py.test -k test__repr__no_start_no_end tests/
+    $ pytest -k test__repr__no_start_no_end tests/
 
 Put it all together to quickly debug a broken test. ::
 
-    $ py.test --pdb -vv -k <test_name> tests/
+    $ pytest --pdb -vv -k <test_name> tests/
 
 You can also set breakpoints in the code with |pdb|_.
 Simply add a line like this:
@@ -454,29 +450,6 @@ Simply add a line like this:
 .. code-block:: python
 
     import pdb; pdb.set_trace()
-
-For advanced usage, if the code has given up terminal control, e.g.,
-if you set a breakpoint in a `Python Prompt Toolkit
-<https://github.com/prompt-toolkit/python-prompt-toolkit>`__
-handler, you can wrest terminal interactivity back with ``stty``:
-
-.. code-block:: python
-
-    import os, pdb; os.system("stty sane"); pdb.set_trace()
-
-- However, if you want to ``continue`` after fiddling with ``stty sane``,
-  you need to restore the settings (by calling ``stty --save`` first,
-  debugging, and then calling ``stty`` again with the saved settings),
-  which is easiest done from within |dob-prompt|_ using helper methods.
-
-  - From within the Carousel, type the ``Alt-=`` key combination to
-    break into the debugger.
-
-  - You can also use the 2 helper methods from within the codebase::
-
-      Controller.pdb_break_enter()
-      # Poke around, then `c`ontinue!
-      Controller.pdb_break_leave()
 
 To test against other Python versions than what is setup in your |virtualenv|_,
 you can use |tox|_ and name an environment with the |envlist|_ option::
@@ -510,7 +483,7 @@ by running various developer tasks.
       $ tox -e flake8
 
       # is just like running flake8:
-      $ flake8 setup.py dob_prompt/ tests/
+      $ flake8 src/ tests/
 
 2. You can lint the docs easily with one or two commands.
 
@@ -526,17 +499,6 @@ by running various developer tasks.
 
       # Generate the reST docs (peruse the output for errors and warnings):
       $ make docs
-
-.. note:: Not all of this author's projects adhere that well to docstrings
-          convention, so pep257-compliance is not mandatory. Generally, the
-          module docs still build! Also, this author values tests, coverage,
-          and readable code over spending time fleshing out docstrings (which
-          could be a waste of time during development, as code changes quickly!
-          but then there's usually "no time" after development, so we often find
-          ourselves with imperfect docstrings littered throughout the code).
-
-          As such, feel free to run the pep257 linter,
-          but also feel free not to. It's noisy.
 
 .. _verify-import-statement-order:
 
@@ -566,13 +528,13 @@ Style Reference
 The project style tracks as closely as possible to community conventions,
 mostly established in 2001 by Python's creator, Guido van Rossum, and others:
 
-* `PEP 8 -- Style Guide for Python Code <https://www.python.org/dev/peps/pep-0008/>`_
+* `PEP 8 -- Style Guide for Python Code <https://peps.python.org/pep-0008/>`_
 
-* `PEP 257 -- Docstring Conventions <https://www.python.org/dev/peps/pep-0257/>`_
+* `PEP 257 -- Docstring Conventions <https://peps.python.org/pep-0257/>`_
 
 In lieu of
 `PEP 287 -- reStructuredText Docstring Format
-<https://www.python.org/dev/peps/pep-0287/>`__,
+<https://peps.python.org/pep-0287/>`__,
 the project prefers Google-style docstrings, as defined in the
 `Google Python Style Guide
 <https://google.github.io/styleguide/pyguide.html>`__:
@@ -582,18 +544,18 @@ the project prefers Google-style docstrings, as defined in the
 
 When building the HTML documentation from the sources,
 Google-style docstrings are recognized by a
-`Sphinx <http://www.sphinx-doc.org/en/master/>`__
+`Sphinx <https://www.sphinx-doc.org/en/master/>`__
 extension:
 
 * `napoleon
-  <http://www.sphinx-doc.org/en/master/usage/extensions/napoleon.html>`__:
+  <https://www.sphinx-doc.org/en/master/usage/extensions/napoleon.html>`__:
   Support for NumPy and Google style docstrings.
 
 Conventional Deviations
 -----------------------
 
-The conventions outlined in `PEP 8 <https://www.python.org/dev/peps/pep-0008/>`_
-are enforced by the `Flake8 <http://flake8.pycqa.org/en/latest/>`__ linter, with
+The conventions outlined in `PEP 8 <https://peps.python.org/pep-0008/>`_
+are enforced by the `Flake8 <https://flake8.pycqa.org/en/latest/>`__ linter, with
 the following custom rules:
 
 * Use a maximum line length of 89 characters.
@@ -754,5 +716,5 @@ Contributor Code of Conduct
 Please respect and adhere to the `Code of Conduct <code-of-conduct.html>`__
 (please also read it!).
 
-**🐹appy 🐹amster 🐹acking!!1**
+** 🐬 Happy 🐠 easy-as-pypi 🦖 Hacking!! 🐡 **
 

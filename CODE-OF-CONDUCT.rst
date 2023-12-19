@@ -1,6 +1,7 @@
 @@@@@@@@@@@@@@@
 Code of Conduct
 @@@@@@@@@@@@@@@
+.. vim:tw=0:ts=2:sw=2:et:norl:nospell:ft=rst
 
 ####################################
 Contributor Covenant Code of Conduct
@@ -72,7 +73,7 @@ Enforcement
 
 Instances of abusive, harassing, or otherwise unacceptable behavior may be
 reported by contacting the project team at
-codeofconduct.dob-prompt@tallybark.com.
+tallybark+doblabs -at- gmail.com.
 All complaints will be reviewed and investigated and will result in a response
 that is deemed necessary and appropriate to the circumstances. The project team is
 obligated to maintain confidentiality with regard to the reporter of an incident.
@@ -88,7 +89,7 @@ Attribution
 
 This Code of Conduct is adapted from the
 `Contributor Covenant <https://www.contributor-covenant.org>`__, version 1.4,
-available at https://www.contributor-covenant.org/version/1/4/code-of-conduct.html.
+available at https://www.contributor-covenant.org/version/1/4/code-of-conduct/.
 
 For answers to common questions about this code of conduct, see
 https://www.contributor-covenant.org/faq.
