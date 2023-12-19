@@ -1,0 +1,8 @@
+# Author: Landon Bouma <https://tallybark.com/>
+# Project: https://github.com/<varies>
+# Pattern: https://github.com/doblabs/easy-as-pypi#🥧
+# License: MIT
+
+/_build/
+/_themes/sphinx_rtd_theme/
+
