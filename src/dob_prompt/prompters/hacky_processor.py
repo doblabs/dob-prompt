@@ -17,9 +17,7 @@
 
 from prompt_toolkit.layout.processors import Processor, Transformation
 
-__all__ = (
-    'HackyProcessor',
-)
+__all__ = ("HackyProcessor",)
 
 
 class HackyProcessor(Processor):
@@ -35,10 +33,9 @@ class HackyProcessor(Processor):
         self.start_completion = False
 
     def __repr__(self):
-        return (
-            '<{}.HackyProcessor at 0x{}'.format(
-                self.__name__, hex(id(self)),
-            )
+        return "<{}.HackyProcessor at 0x{}".format(
+            self.__name__,
+            hex(id(self)),
         )
 
     def apply_transformation(self, transformation_input):
@@ -96,4 +93,3 @@ class HackyProcessor(Processor):
 
         showing_completions = complete_state is not None
         self.prompt.summoned(showing_completions=showing_completions)
-

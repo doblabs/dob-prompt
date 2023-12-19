@@ -33,13 +33,18 @@ from dob_prompt import prompters
 #   not change the input! Still, dob-prompt went from 0% coverage all
 #   the way to 73%, so, whatever, good ROI for a quick hack job!
 
+
 class TestBasicCarousel(object):
     """Non-interactive Interactive Carousel tests."""
 
     # ***
 
     def _feed_cli_with_input(
-        self, controller_with_logging, input_text, activity, mocker,
+        self,
+        controller_with_logging,
+        input_text,
+        activity,
+        mocker,
     ):
         inp = create_pipe_input()
         try:
@@ -50,8 +55,8 @@ class TestBasicCarousel(object):
                 # (lb): Not sure why the linter doesn't flag F841 on these
                 #       two return vars, maybe because it's a list?
                 act_name, cat_name = prompter.ask_act_cat(
-                    filter_activity='',
-                    filter_category='',
+                    filter_activity="",
+                    filter_category="",
                     no_completion_act=None,
                     no_completion_cat=None,
                 )
@@ -67,7 +72,7 @@ class TestBasicCarousel(object):
     # ***
 
     @pytest.mark.parametrize(
-        ('key_sequence'),
+        ("key_sequence"),
         [
             # Test left-arrowing and first (early Life) gap fact.
             # Left arrow three times.
@@ -75,72 +80,92 @@ class TestBasicCarousel(object):
             # - Second time causes at-first-fact message.
             # - Third time's a charm.
             [
-                '\x1bOD',   # Left arrow ←.
-                '\x1bOD',   # Left arrow ←.
-                '\x1bOD',   # Left arrow ←.
-                '\x11',     # Ctrl-Q.
-                '\x11',     # Ctrl-Q.
-                '\x11',     # Ctrl-Q.
+                "\x1bOD",  # Left arrow ←.
+                "\x1bOD",  # Left arrow ←.
+                "\x1bOD",  # Left arrow ←.
+                "\x11",  # Ctrl-Q.
+                "\x11",  # Ctrl-Q.
+                "\x11",  # Ctrl-Q.
             ],
         ],
     )
     def test_basic_import4_left_arrow_three_time(
-        self, controller_with_logging, key_sequence, activity, mocker,
+        self,
+        controller_with_logging,
+        key_sequence,
+        activity,
+        mocker,
     ):
-        input_text = ''.join(key_sequence)
+        input_text = "".join(key_sequence)
         self._feed_cli_with_input(
-            controller_with_logging, input_text, activity, mocker,
+            controller_with_logging,
+            input_text,
+            activity,
+            mocker,
         )
 
     # ***
 
     @pytest.mark.parametrize(
-        ('key_sequence'),
+        ("key_sequence"),
         [
             [
                 # Arrow right, arrow left.
-                '\x1bOD',
-                '\x1bOC',
+                "\x1bOD",
+                "\x1bOC",
                 # Three Cancels don't make a Right.
-                '\x11',
-                '\x11',
-                '\x11',
+                "\x11",
+                "\x11",
+                "\x11",
                 # FIXME/2019-02-20: Because, what, arrowing left goes to
                 #                   Previous Big Bang Gap Fact,
                 #                   so extra Ctrl-Q needed?
                 #                   Oddly, in log, I still only see 2 exit_command's!
                 #                   But apparently we need 4 strokes to exit.
-                '\x11',
+                "\x11",
             ],
         ],
     )
     def test_basic_import4_right_arrow_left_arrow(
-        self, controller_with_logging, key_sequence, activity, mocker,
+        self,
+        controller_with_logging,
+        key_sequence,
+        activity,
+        mocker,
     ):
-        input_text = ''.join(key_sequence)
+        input_text = "".join(key_sequence)
         self._feed_cli_with_input(
-            controller_with_logging, input_text, activity, mocker,
+            controller_with_logging,
+            input_text,
+            activity,
+            mocker,
         )
 
     # ***
 
     @pytest.mark.parametrize(
-        ('key_sequence'),
+        ("key_sequence"),
         [
             [
                 # Jump to final fact.
-                'G',
-                '\x11',
-                '\x11',
-                '\x11',
+                "G",
+                "\x11",
+                "\x11",
+                "\x11",
             ],
         ],
     )
     def test_basic_import4_G_go_last(
-        self, controller_with_logging, key_sequence, activity, mocker,
+        self,
+        controller_with_logging,
+        key_sequence,
+        activity,
+        mocker,
     ):
-        input_text = ''.join(key_sequence)
+        input_text = "".join(key_sequence)
         self._feed_cli_with_input(
-            controller_with_logging, input_text, activity, mocker,
+            controller_with_logging,
+            input_text,
+            activity,
+            mocker,
         )
-

@@ -18,24 +18,16 @@
 """"""
 
 __all__ = (
-    'KeyBond',
+    "KeyBond",
     # Private:
     #   'KeyCodeBriefly',
 )
 
 
 class KeyCodeBriefly(object):
-    """
-    """
+    """ """
 
-    def __init__(
-        self,
-        keycode,
-        brief,
-        briefs=None,
-        highlight=False,
-        **kwargs
-    ):
+    def __init__(self, keycode, brief, briefs=None, highlight=False, **kwargs):
         self.keycode = keycode
         self._brief = brief
         self._briefs = briefs
@@ -44,7 +36,7 @@ class KeyCodeBriefly(object):
             setattr(self, kw, arg)
 
     def __str__(self):
-        return 'keycode: {} / _brief: {}'.format(self.keycode, self._brief)
+        return "keycode: {} / _brief: {}".format(self.keycode, self._brief)
 
     def __eq__(self, other):
         if isinstance(other, self.__class__):
@@ -80,16 +72,16 @@ class KeyCodeBriefly(object):
             key_hint = self.keycode[0].capitalize()
         else:
             assert len(self.keycode) == 2
-            assert self.keycode[0] == 'escape'
-            key_hint = 'M-{}'.format(self.keycode[1].lower())
+            assert self.keycode[0] == "escape"
+            key_hint = "M-{}".format(self.keycode[1].lower())
         return key_hint
 
 
 # ***
 
+
 class KeyBond(KeyCodeBriefly):
-    """
-    """
+    """ """
 
     def __init__(
         self,
@@ -100,7 +92,7 @@ class KeyBond(KeyCodeBriefly):
         # callers yet (to rearrange parameters).
         #   FIXME/MAYBE: Fix callers and make action required param again.
         action=None,
-        wordy='',
+        wordy="",
         **kwargs
     ):
         super(KeyBond, self).__init__(keycode, brief, **kwargs)
@@ -108,10 +100,9 @@ class KeyBond(KeyCodeBriefly):
         self.wordy = wordy
 
     def __str__(self):
-        return 'keycode: {} / _brief: {} / action: {} / wordy: {}'.format(
+        return "keycode: {} / _brief: {} / action: {} / wordy: {}".format(
             self.keycode,
             self._brief,
             self.action,
             self.wordy,
         )
-

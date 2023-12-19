@@ -22,17 +22,14 @@ from prompt_toolkit.styles import Style
 from .interface_bonds import KeyBond
 from .interface_fanny import BindingsBarBuilder
 
-__all__ = (
-    'BottomBarArea',
-)
+__all__ = ("BottomBarArea",)
 
 
 # ***
 
 
 class BottomBarArea(object):
-    """
-    """
+    """ """
 
     def __init__(self, prompt):
         self.prompt = prompt
@@ -52,13 +49,13 @@ class BottomBarArea(object):
 
     @property
     def complete_while_typing(self):
-        return (self.active_sort is None) or (self.active_sort.action != 'order')
+        return (self.active_sort is None) or (self.active_sort.action != "order")
 
     @property
     def enable_history_search(self):
         # When using completions, do not hook up up arrow to browsing
         # through history. Otherwise, do.
-        return self.active_sort and self.active_sort.action == 'order'
+        return self.active_sort and self.active_sort.action == "order"
 
     @property
     def default_sort(self):
@@ -88,9 +85,7 @@ class BottomBarArea(object):
 
     def init_binding_meta(self):
         self.all_bindings = (
-            self.sort_bindings
-            + self.filter_bindings
-            + self.settings_bindings
+            self.sort_bindings + self.filter_bindings + self.settings_bindings
         )
         self.binding_meta = {}
         for binding in self.all_bindings:
@@ -120,22 +115,21 @@ class BottomBarArea(object):
                 return brief
             if sort_order is None:
                 sort_order = self.prompt.sort_order
-            marker = '↑' if sort_order == 'asc' else '↓'
-            briefed = '{} {}'.format(brief, marker)
+            marker = "↑" if sort_order == "asc" else "↓"
+            briefed = "{} {}".format(brief, marker)
             return briefed
+
         return briefly
 
     def meta_sort_briefs(self, brief):
         briefly = self.meta_sort_briefly(brief)
         briefs = []
-        for sort_order in ['asc', 'desc']:
-            briefs.append(
-                briefly(None, highlight=False, sort_order=sort_order)
-            )
+        for sort_order in ["asc", "desc"]:
+            briefs.append(briefly(None, highlight=False, sort_order=sort_order))
         return briefs
 
     def meta_sort_reserve_width(self):
-        return len('↑') + len(' ')
+        return len("↑") + len(" ")
 
     def meta_sort_highlight(self, binding):
         if not self.prompt.showing_completions or binding != self.active_sort:
@@ -147,13 +141,13 @@ class BottomBarArea(object):
     @property
     def meta_sort_by_name(self):
         return KeyBond(
-            'f2',
-            self.meta_sort_briefly(_('name')),
-            action='name',
-            briefs=self.meta_sort_briefs(_('name')),
+            "f2",
+            self.meta_sort_briefly(_("name")),
+            action="name",
+            briefs=self.meta_sort_briefs(_("name")),
             highlight=self.meta_sort_highlight,
-            wordy=_('All {types} sorted alphabetically'),
-            sort_order='asc',
+            wordy=_("All {types} sorted alphabetically"),
+            sort_order="asc",
         )
 
     @property
@@ -162,38 +156,38 @@ class BottomBarArea(object):
             # (lb): I kinda like 'latest' to not confuse 'start' with 'time',
             # but 'start' is technically the most correct, as this options
             # sorts suggestions by Fact.start.
-            'f3',
-            self.meta_sort_briefly(_('start')),
-            action='start',
-            briefs=self.meta_sort_briefs(_('start')),
+            "f3",
+            self.meta_sort_briefly(_("start")),
+            action="start",
+            briefs=self.meta_sort_briefs(_("start")),
             highlight=self.meta_sort_highlight,
-            wordy=_('{types} you have applied to recent facts'),
-            sort_order='desc',
+            wordy=_("{types} you have applied to recent facts"),
+            sort_order="desc",
         )
 
     @property
     def meta_sort_by_usage(self):
         return KeyBond(
             # (lb): 'usage'? 'count'? Does it matter?
-            'f4',
-            self.meta_sort_briefly(_('count')),
-            action='usage',
-            briefs=self.meta_sort_briefs(_('count')),
+            "f4",
+            self.meta_sort_briefly(_("count")),
+            action="usage",
+            briefs=self.meta_sort_briefs(_("count")),
             highlight=self.meta_sort_highlight,
-            wordy=_('{types} which you have used on the most facts'),
-            sort_order='desc',
+            wordy=_("{types} which you have used on the most facts"),
+            sort_order="desc",
         )
 
     @property
     def meta_sort_by_time(self):
         return KeyBond(
-            'f5',
-            self.meta_sort_briefly(_('time')),
-            action='time',
-            briefs=self.meta_sort_briefs(_('time')),
+            "f5",
+            self.meta_sort_briefly(_("time")),
+            action="time",
+            briefs=self.meta_sort_briefs(_("time")),
             highlight=self.meta_sort_highlight,
-            wordy=_('{types} on which you have spent the most time'),
-            sort_order='desc',
+            wordy=_("{types} on which you have spent the most time"),
+            sort_order="desc",
         )
 
     @property
@@ -203,13 +197,13 @@ class BottomBarArea(object):
             #       I tried 'typed' for a while as the UX name, but it's
             #        a mental stretch ("Oh! things I *typed* in the past").
             #       So let's try 'hist', which is nice and terse.
-            'f6',
-            self.meta_sort_briefly(_('hist')),
-            action='history',
-            briefs=self.meta_sort_briefs(_('hist')),
+            "f6",
+            self.meta_sort_briefly(_("hist")),
+            action="history",
+            briefs=self.meta_sort_briefs(_("hist")),
             highlight=self.meta_sort_highlight,
-            wordy=_('{types} you have recently entered'),
-            sort_order='desc',
+            wordy=_("{types} you have recently entered"),
+            sort_order="desc",
         )
 
     # ***
@@ -237,9 +231,9 @@ class BottomBarArea(object):
 
         def brief_ignore_case(binding):
             if self.prompt.completer.ignore_case:
-                brief = _('case')
+                brief = _("case")
             else:
-                brief = _('Case')
+                brief = _("Case")
             return brief
 
         # NOTE: (lb): A lot of the Ctrl key bindings are taken, at least in Vi mode,
@@ -255,10 +249,10 @@ class BottomBarArea(object):
             # ('m-i',),
             # 2020-03-30: Trying escape-i again, m-i is a fork feature,
             # and I'd rather not have to publish yet another forked project.
-            ('escape', 'i'),
+            ("escape", "i"),
             brief_ignore_case,
             handle_ignore_case,
-            briefs=[_('case'), _('Case')],
+            briefs=[_("case"), _("Case")],
             highlight=True,
         )
 
@@ -270,9 +264,9 @@ class BottomBarArea(object):
 
         def brief_match_middle(binding):
             if self.prompt.completer.match_middle:
-                brief = _('middle')
+                brief = _("middle")
             else:
-                brief = _('start')
+                brief = _("start")
             return brief
 
         return KeyBond(
@@ -280,10 +274,10 @@ class BottomBarArea(object):
             # #  ('escape', 'm'),
             # ('m-m',),
             # 2020-03-30: Trying again, against nascent upstream and not HOTH:
-            ('escape', 'm'),
+            ("escape", "m"),
             brief_match_middle,
             handle_match_middle,
-            briefs=[_('middle'), _('start')],
+            briefs=[_("middle"), _("start")],
             highlight=True,
         )
 
@@ -297,7 +291,9 @@ class BottomBarArea(object):
                 # FIDDLING: You can insert text into the buffer, e.g.,
                 #  event.app.current_buffer.insert_text('{}!'.format(keycode))
                 self.prompt.restart_completer(
-                    event, self.binding_meta[keycode], toggle_ok=True,
+                    event,
+                    self.binding_meta[keycode],
+                    toggle_ok=True,
                 )
 
             return handler
@@ -329,17 +325,19 @@ class BottomBarArea(object):
         # (Otherwise, to get same effect, so could pad each line with spaces
         # to the terminal width using the background color we wanted; but this
         # is a lot easier.)
-        style = Style.from_dict({
-            'bottom-toolbar': '#{} bg:#{}'.format(
-                # FIXME/2019-12-01: Move hardcoded values to styling config. #styling
-                self.prompt.colors.color_2,
-                self.prompt.colors.color_1,
-            ),
-            # We could specify the text color here, e.g.,
-            #  'bottom-toolbar.text': '#FCA5A5 bg:#AA3939',
-            # but we instead use (color, text) tuples in
-            # bottom_toolbar renderer for finer-grained control.
-        })
+        style = Style.from_dict(
+            {
+                "bottom-toolbar": "#{} bg:#{}".format(
+                    # FIXME/2019-12-01: Move hardcoded values to styling config. #styling
+                    self.prompt.colors.color_2,
+                    self.prompt.colors.color_1,
+                ),
+                # We could specify the text color here, e.g.,
+                #  'bottom-toolbar.text': '#FCA5A5 bg:#AA3939',
+                # but we instead use (color, text) tuples in
+                # bottom_toolbar renderer for finer-grained control.
+            }
+        )
         return style
 
     # ***
@@ -369,20 +367,20 @@ class BottomBarArea(object):
         def add_bindings_filter(builder):
             builder.add_bindings(
                 self.filter_bindings,
-                _('Scope'),
+                _("Scope"),
             )
 
         def add_bindings_settings(builder):
             builder.add_bindings(
                 self.settings_bindings,
-                _('Match'),
+                _("Match"),
             )
 
         # ***
 
         def sort_bindings_plinth():
             if not self.prompt.showing_completions:
-                description = '▲ Choose a sort order to see hints ▲'
+                description = "▲ Choose a sort order to see hints ▲"
             else:
                 description = self.active_sort.wordy.format(types=self.say_types)
             return description
@@ -393,4 +391,3 @@ class BottomBarArea(object):
 
     def extend_bottom(self, builder):
         raise NotImplementedError
-

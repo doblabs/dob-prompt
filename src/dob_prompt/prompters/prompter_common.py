@@ -17,18 +17,14 @@
 
 """"""
 
-__all__ = (
-    'PrompterCommon',
-)
+__all__ = ("PrompterCommon",)
 
 
 class PrompterCommon(object):
-    """
-    """
+    """ """
 
     def ask_act_cat(self, *args, **kwargs):
         raise NotImplementedError
 
     def ask_for_tags(self, *args, **kwargs):
         raise NotImplementedError
-
