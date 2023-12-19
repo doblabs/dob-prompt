@@ -33,16 +33,16 @@ classifiers = [
 
 # Keywords for PyPI to display, and to use for search results.
 keywords = [
-    "journal,"
-    "diary,"
-    "timesheet,"
-    "timetrack,"
-    "jrnl,"
-    "rednotebook,"
-    "todo.txt,"
-    "prjct,"
-    "hamster,"
-    "fact,"
+    "journal",
+    "diary",
+    "timesheet",
+    "timetrack",
+    "jrnl",
+    "rednotebook",
+    "todo.txt",
+    "prjct",
+    "hamster",
+    "fact",
 ]
 
 # poetry build excludes __pycache__ dirs
@@ -528,15 +528,15 @@ known_third_party = [
     # USAGE: List symbol names from application depenendencies here,
     #        so the corresponding imports are grouped accordingly.
     # *** External packages
-    "apipkg,"
-    "inflector,"
-    "prompt_toolkit,"
-    # *** HOTH packages,"
-    "easy_as_pypi_appdirs,"
-    "easy_as_pypi_getver,"
-    "pedantic_timedelta,"
-    "nark,"
-    "dob_bright,"
+    "apipkg",
+    "inflector",
+    "prompt_toolkit",
+    # *** HOTH packages",
+    "easy_as_pypi_appdirs",
+    "easy_as_pypi_getver",
+    "pedantic_timedelta",
+    "nark",
+    "dob_bright",
     #
     # *** Testing packages
     "factory",
