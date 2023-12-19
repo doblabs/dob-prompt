@@ -15,23 +15,19 @@
 # If you lost the GNU General Public License that ships with this software
 # repository (read the 'LICENSE' file), see <http://www.gnu.org/licenses/>.
 
+import time
+from collections import namedtuple
 from gettext import gettext as _
 
-import time
-
-from collections import namedtuple
-
+from dob_bright.helpers.path import touch
+from easy_as_pypi_appdirs import AppDirs
+from easy_as_pypi_appdirs.expand_and_mkdirs import must_ensure_appdirs_path
 from prompt_toolkit import PromptSession, print_formatted_text
 from prompt_toolkit.auto_suggest import AutoSuggest
 from prompt_toolkit.formatted_text import FormattedText
 from prompt_toolkit.history import FileHistory, InMemoryHistory
 from prompt_toolkit.key_binding import KeyBindings
 from prompt_toolkit.shortcuts import CompleteStyle
-
-from easy_as_pypi_appdirs import AppDirs
-from easy_as_pypi_appdirs.expand_and_mkdirs import must_ensure_appdirs_path
-
-from dob_bright.helpers.path import touch
 
 from .. import __package_name__
 from .prompter_common import PrompterCommon

@@ -16,7 +16,6 @@
 # repository (read the 'LICENSE' file), see <http://www.gnu.org/licenses/>.
 
 import time
-
 from gettext import gettext as _
 
 from prompt_toolkit.validation import Validator

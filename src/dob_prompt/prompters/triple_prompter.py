@@ -15,9 +15,8 @@
 # If you lost the GNU General Public License that ships with this software
 # repository (read the 'LICENSE' file), see <http://www.gnu.org/licenses/>.
 
-from nark.items.activity import Activity
-
 from dob_bright.crud.interrogate import ask_edit_with_editor
+from nark.items.activity import Activity
 
 # Lazy-load AwesomePrompt to save ~0.1 seconds when not needed.
 from dob_prompt import prompters
