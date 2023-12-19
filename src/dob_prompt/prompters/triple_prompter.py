@@ -22,23 +22,21 @@ from dob_bright.crud.interrogate import ask_edit_with_editor
 # Lazy-load AwesomePrompt to save ~0.1 seconds when not needed.
 from dob_prompt import prompters
 
-__all__ = (
-    'ask_user_for_edits',
-)
+__all__ = ("ask_user_for_edits",)
 
 
 # ***
+
 
 def ask_user_for_edits(
     controller,
     fact,
     always_ask=False,
     prompt_agent=None,
-    restrict_edit='',
+    restrict_edit="",
     no_completion=None,
 ):
-    """
-    """
+    """ """
 
     def _ask_user_for_edits():
         verify_always_ask()
@@ -57,7 +55,11 @@ def ask_user_for_edits(
 
     def verify_always_ask():
         assert always_ask in [
-            True, False, 'actegory', 'tags', 'description',
+            True,
+            False,
+            "actegory",
+            "tags",
+            "description",
         ]
 
     # ***
@@ -73,9 +75,8 @@ def ask_user_for_edits(
 
     def ask_act_cat(prompter, fact):
         filter_activity, filter_category = prepare_ask_act_cat(fact)
-        if (
-            (filter_activity and filter_category and always_ask is False)
-            or ('' != restrict_edit and 'actegory' != restrict_edit)
+        if (filter_activity and filter_category and always_ask is False) or (
+            "" != restrict_edit and "actegory" != restrict_edit
         ):
             return
 
@@ -94,11 +95,11 @@ def ask_user_for_edits(
         set_actegory(fact, act_name, cat_name)
 
     def prepare_ask_act_cat(fact):
-        filter_activity = ''
+        filter_activity = ""
         if fact.activity and fact.activity.name:
             filter_activity = fact.activity.name
 
-        filter_category = ''
+        filter_category = ""
         if fact.activity and fact.activity.category and fact.activity.category.name:
             filter_category = fact.activity.category.name
 
@@ -108,7 +109,9 @@ def ask_user_for_edits(
         fact.activity = Activity.create_from_composite(act_name, cat_name)
         try:
             fact.activity = controller.activities.get_by_composite(
-                fact.activity.name, fact.activity.category, raw=False,
+                fact.activity.name,
+                fact.activity.category,
+                raw=False,
             )
         except KeyError:
             pass
@@ -116,9 +119,8 @@ def ask_user_for_edits(
     # ***
 
     def ask_for_tags(prompter, fact):
-        if (
-            (fact.tags and always_ask is False)
-            or ('' != restrict_edit and 'tags' != restrict_edit)
+        if (fact.tags and always_ask is False) or (
+            "" != restrict_edit and "tags" != restrict_edit
         ):
             return
 
@@ -136,9 +138,8 @@ def ask_user_for_edits(
     # ***
 
     def fact_ask_description(fact):
-        if (
-            (fact.description and always_ask is False)
-            or ('' != restrict_edit and 'description' != restrict_edit)
+        if (fact.description and always_ask is False) or (
+            "" != restrict_edit and "description" != restrict_edit
         ):
             return
 
@@ -157,4 +158,3 @@ def ask_user_for_edits(
     # ***
 
     return _ask_user_for_edits()
-

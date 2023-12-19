@@ -24,19 +24,19 @@ from pedantic_timedelta import PedanticTimedelta
 from prompt_toolkit.auto_suggest import Suggestion
 from prompt_toolkit.completion import WordCompleter
 
-__all__ = (
-    'FactPartCompleterSuggester',
-)
+__all__ = ("FactPartCompleterSuggester",)
 
 
 class FactPartCompleterSuggester(WordCompleter):
-    """
-    """
+    """ """
 
     def __init__(self, summoned):
         self.summoned = summoned
         super(FactPartCompleterSuggester, self).__init__(
-            words=[], ignore_case=True, match_middle=True, sentence=True,
+            words=[],
+            ignore_case=True,
+            match_middle=True,
+            sentence=True,
         )
 
     def hydrate(self, results, **kwargs):
@@ -78,15 +78,15 @@ class FactPartCompleterSuggester(WordCompleter):
             return
 
         (
-            tm_fmttd, tm_scale, tm_units,
+            tm_fmttd,
+            tm_scale,
+            tm_units,
         ) = PedanticTimedelta(days=span).time_format_scaled()
 
-        metad[name] = _(
-            'Used on {usage} {facts} for {time}: “{name}”'
-        ).format(
+        metad[name] = _("Used on {usage} {facts} for {time}: “{name}”").format(
             name=name,
             usage=usage,
-            facts=Inflector(English).conditional_plural(usage, _('fact')),
+            facts=Inflector(English).conditional_plural(usage, _("fact")),
             time=tm_fmttd,
         )
 
@@ -101,7 +101,8 @@ class FactPartCompleterSuggester(WordCompleter):
     def get_completions(self, document, complete_event):
         self.summoned(showing_completions=True)
         return super(FactPartCompleterSuggester, self).get_completions(
-            document, complete_event,
+            document,
+            complete_event,
         )
 
     def get_suggestion(self, _buffer, document):
@@ -113,12 +114,12 @@ class FactPartCompleterSuggester(WordCompleter):
         if not text:
             return None  # No suggestion
 
-        suggestion = ''
+        suggestion = ""
         for word in self.words:
             if word.lower().startswith(text):
                 suggestion = word
                 break
-        suggestion = Suggestion(suggestion[len(text):])
+        suggestion = Suggestion(suggestion[len(text) :])
         return suggestion
 
     def toggle_ignore_case(self):
@@ -126,4 +127,3 @@ class FactPartCompleterSuggester(WordCompleter):
 
     def toggle_match_middle(self):
         self.match_middle = not self.match_middle
-

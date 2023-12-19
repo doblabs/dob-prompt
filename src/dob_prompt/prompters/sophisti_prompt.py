@@ -38,15 +38,14 @@ from .prompter_common import PrompterCommon
 from .the_banner_area import BannerBarArea
 
 __all__ = (
-    'SophisticatedPrompt',
+    "SophisticatedPrompt",
     # Private:
     #  'HamsterPartAutoSuggest',
 )
 
 
 class HamsterPartAutoSuggest(AutoSuggest):
-    """
-    """
+    """ """
 
     def __init__(self, completer):
         self.completer = completer
@@ -56,8 +55,7 @@ class HamsterPartAutoSuggest(AutoSuggest):
 
 
 class SophisticatedPrompt(PrompterCommon):
-    """
-    """
+    """ """
 
     DIRTY_QUITER_THRESHOLD = 1.667
 
@@ -220,7 +218,7 @@ class SophisticatedPrompt(PrompterCommon):
 
     def ensure_active(self, binding=None, toggle_ok=False):
         if self.active_sort is None:
-            self.sort_order = 'desc'
+            self.sort_order = "desc"
 
         if binding is not None:
             if self.active_sort == binding:
@@ -229,16 +227,16 @@ class SophisticatedPrompt(PrompterCommon):
                         # Toggle: sort_order, !sort_order, hide-completions
                         # FIXME: (lb): I'm not sold on this behavior. Make cfgable?
                         self.showing_completions = False
-                    self.sort_order = 'asc' if self.sort_order == 'desc' else 'desc'
+                    self.sort_order = "asc" if self.sort_order == "desc" else "desc"
             else:
                 self.active_sort = binding
                 self.sort_order = binding.sort_order
 
     # ***
 
-    FakeUsageResult = namedtuple('FakeUsageResult', ('name', 'usage', 'span'))
+    FakeUsageResult = namedtuple("FakeUsageResult", ("name", "usage", "span"))
 
-    FakeUsageWrapper = namedtuple('FakeUsageWrapper', ('item', 'uses', 'span'))
+    FakeUsageWrapper = namedtuple("FakeUsageWrapper", ("item", "uses", "span"))
 
     def refresh_completions(self):
         results = self.fetch_completions()
@@ -277,7 +275,7 @@ class SophisticatedPrompt(PrompterCommon):
             names.add(entry_name)
             result = SophisticatedPrompt.FakeUsageResult(entry_name, None, None)
             results.append(SophisticatedPrompt.FakeUsageWrapper(result, None, None))
-        if self.sort_order == 'asc':
+        if self.sort_order == "asc":
             results.reverse()
         return results
 
@@ -302,14 +300,18 @@ class SophisticatedPrompt(PrompterCommon):
     @property
     def completion_hints(self):
         return [
-            _('Press TAB to show a list of {part_type} suggestions.'),
-            _('Use ARROW keys to navigate list of suggestions,'
-              ' and ENTER to choose one.'),
-            _('As you type, the best match is shown. Use RIGHT → ARROW to accept it.'),
-            _('Press UP ↑ ARROW to cycle through previous values you have entered.'),
-            _('Use F-keys to change how the list of suggestions is sorted.'),
-            _('You can also use your favorite Readline keys.'
-              ' E.g., Ctrl-u deletes to start of line.'),
+            _("Press TAB to show a list of {part_type} suggestions."),
+            _(
+                "Use ARROW keys to navigate list of suggestions,"
+                " and ENTER to choose one."
+            ),
+            _("As you type, the best match is shown. Use RIGHT → ARROW to accept it."),
+            _("Press UP ↑ ARROW to cycle through previous values you have entered."),
+            _("Use F-keys to change how the list of suggestions is sorted."),
+            _(
+                "You can also use your favorite Readline keys."
+                " E.g., Ctrl-u deletes to start of line."
+            ),
         ]
 
     @property
@@ -342,7 +344,6 @@ class SophisticatedPrompt(PrompterCommon):
             history=self.history,
             enable_history_search=self.enable_history_search,
             auto_suggest=HamsterPartAutoSuggest(self.completer),
-
             # (lb): There are pros and cons to setting vi_mode.
             # - vi_mode pros: Reacting to single 'escape' keypress is faster!
             #   This is because PPT's default mode, emacs, wires a bunch of
@@ -365,7 +366,7 @@ class SophisticatedPrompt(PrompterCommon):
 
     @property
     def session_prompt_prefix(self):
-        return '> '
+        return "> "
 
     # This is the blocking (not asyncio) PPT prompt call that runs the
     # act@gory and tags inputs. All the dob user interface interaction
@@ -379,16 +380,14 @@ class SophisticatedPrompt(PrompterCommon):
             # "Ctrl-D binding is only active when the default buffer is
             # selected and empty." This behavior is baked in, and EOD means
             # end-of-data, so it's like user cleared text and pressed Enter.
-            return ''
+            return ""
 
-    def _session_prompt(self, default='', validator=None):
+    def _session_prompt(self, default="", validator=None):
         validate_while_typing = validator is not None
         text = self.session.prompt(
             self.session_prompt_prefix,
-
             # The initial input control text.
             default=default,
-
             # (lb): The super special bottom toolbar. Its state depends on the
             # state of the prompt. If I were to rebuild the Awesome Prompt, I'd
             # use PPT components (like the interactive editor uses) and not the
@@ -399,7 +398,6 @@ class SophisticatedPrompt(PrompterCommon):
             # explicitly nudge the bottom_toolbar to update it; the PPT prompt
             # doesn't otherwise do anything with it other than draw it once.)
             bottom_toolbar=self.bottom_toolbar,
-
             # 2020-01-28: The following comment was writ circa PPTv2 (PTK2) era.
             #             PTK3 is always-async.
             # (lb): When I added burnout messages that hide on their own
@@ -420,22 +418,19 @@ class SophisticatedPrompt(PrompterCommon):
             # get tickled periodically (and which we can use to implement
             # crude "timers").
             refresh_interval=self.SESSION_PROMPT_REFRESH_INTERVAL,
-
             # Completer wiring. See, e.g., ActegoryCompleterSuggester.
             completer=self.completer,
             complete_in_thread=True,
             complete_style=CompleteStyle.MULTI_COLUMN,
             complete_while_typing=self.complete_while_typing,
-
             # Processor wiring. See, e.g., ActegoryHackyProcessor.
-            input_processors=[self.processor, ],
-
+            input_processors=[
+                self.processor,
+            ],
             # KeyBinding wiring.
             key_bindings=self.key_bindings,
-
             # Style: Twiddle to extend bg colors the full terminal width.
             style=self.bottombar.prompt_style,
-
             # Validator wiring, e.g., ActegoryValidator.
             validate_while_typing=validate_while_typing,
             validator=validator,
@@ -539,7 +534,7 @@ class SophisticatedPrompt(PrompterCommon):
 
     # ***
 
-    DEFAULT_HIST_PATH_DIR = 'history'
+    DEFAULT_HIST_PATH_DIR = "history"
 
     @property
     def history_path(self):
@@ -573,20 +568,20 @@ class SophisticatedPrompt(PrompterCommon):
             # Ctrl-c is blocked in the interactive editor Carousel so here as well.
             # - Well, sorta blocked. It'll clear the input and reset the completer!
             #   (By reset the completer, it goes back to, e.g., F2/sort-by-name.)
-            hint = _('Try Ctrl-q if you want to quit!').format()
+            hint = _("Try Ctrl-q if you want to quit!").format()
             # (lb): 2020-04-10: Trying this, too: reset completer state.
             binding = self.default_sort
             self.reset_completer(binding)
         elif self.ctrl_q_pressed:
-            hint = _('Press Ctrl-q a second time to really quit!').format()
+            hint = _("Press Ctrl-q a second time to really quit!").format()
         elif self.update_pending and isinstance(self.update_pending, str):
             hint = self.update_pending
         else:
-            hint = ''
+            hint = ""
         return hint
 
     def header_hint_parts(self, max_col=0):
-        prefix = '  '
+        prefix = "  "
         what_hint = self.prompt_header_hint
         # BEWARE/2019-11-23: This is not ANSI-aware.
         colfill = max_col - len(what_hint)
@@ -596,12 +591,12 @@ class SophisticatedPrompt(PrompterCommon):
             what_hint = what_hint[:max_col]
 
         line_parts = []
-        line_parts.append(('', prefix))
-        line_parts.append(('italic underline', what_hint))
+        line_parts.append(("", prefix))
+        line_parts.append(("italic underline", what_hint))
         if max_col > 0 and colfill > 0:
-            line_parts.append(('', ' ' * colfill))
+            line_parts.append(("", " " * colfill))
 
-        self.debug('line_parts: {}'.format(line_parts))
+        self.debug("line_parts: {}".format(line_parts))
 
         return line_parts
 
@@ -635,7 +630,7 @@ class SophisticatedPrompt(PrompterCommon):
         print_formatted_text(FormattedText(hint_parts))
 
         prompt_parts = self.prompt_recreate_filled(max_col)
-        print_formatted_text(FormattedText(prompt_parts), end='')
+        print_formatted_text(FormattedText(prompt_parts), end="")
 
         # (lb): "Inconceivable." Correct the cursor position: move the
         # cursor to the end of the recreated text ("where it belongs").
@@ -649,7 +644,7 @@ class SophisticatedPrompt(PrompterCommon):
         #  self.debug('UIHR: cursor_adjust/1: {}'.format(cursor_adjust))
         renderer.output.cursor_backward(cursor_adjust)
 
-        self.debug('printed hint')
+        self.debug("printed hint")
 
     # ***
 
@@ -670,7 +665,7 @@ class SophisticatedPrompt(PrompterCommon):
             return
         if (now - self.ctrl_c_pressed) <= self.DIRTY_QUITER_THRESHOLD:
             return
-        self.debug('reset Ctrl-c timeout')
+        self.debug("reset Ctrl-c timeout")
         self.ctrl_c_forget()
 
     def ctrl_c_forget(self):
@@ -687,7 +682,7 @@ class SophisticatedPrompt(PrompterCommon):
             return
         # Window to press Ctrl-q twice closed without receiving second Ctrl-q,
         # so reset the hint.
-        self.debug('reset Ctrl-q timeout')
+        self.debug("reset Ctrl-q timeout")
         self.ctrl_q_forget()
 
     def ctrl_q_forget(self):
@@ -697,10 +692,10 @@ class SophisticatedPrompt(PrompterCommon):
         self.update_input_hint_renderer()
 
     def reset_timeouts(self):
-        self.debug('reset_timeouts/1')
+        self.debug("reset_timeouts/1")
         self.ctrl_c_forget()
         self.ctrl_q_forget()
-        self.debug('reset_timeouts!!!!!!!!!!!')
+        self.debug("reset_timeouts!!!!!!!!!!!")
 
     # ***
 
@@ -710,7 +705,7 @@ class SophisticatedPrompt(PrompterCommon):
         # not know about this value used by a derived class, PromptForActegory,
         # but not by the other derived class, PromptForMoreTags. But it makes
         # some magic easier to do this.)
-        return ''
+        return ""
 
     # ***
 
@@ -778,4 +773,3 @@ class SophisticatedPrompt(PrompterCommon):
     def handle_forward_char(self, event):
         """Awesome Prompt RIGHT handler."""
         return False
-

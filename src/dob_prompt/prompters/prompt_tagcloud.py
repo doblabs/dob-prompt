@@ -29,15 +29,14 @@ from .sophisti_prompt import SophisticatedPrompt
 from .the_bottom_area import BottomBarArea
 
 __all__ = (
-    'PromptForMoreTags',
+    "PromptForMoreTags",
     # Private:
     #   'TagCloudBottomBarArea',
 )
 
 
 class PromptForMoreTags(SophisticatedPrompt):
-    """
-    """
+    """ """
 
     def __init__(self, controller):
         super(PromptForMoreTags, self).__init__(controller)
@@ -48,16 +47,16 @@ class PromptForMoreTags(SophisticatedPrompt):
     @property
     def activity_name(self):
         if self.activity is None:
-            return '<None>'
+            return "<None>"
         else:
             return self.activity.name
 
     @property
     def category_name(self):
         if self.activity is None:
-            return '<Act:None>'
+            return "<Act:None>"
         elif self.activity.category is None:
-            return '<None>'
+            return "<None>"
         else:
             return self.activity.category.name
 
@@ -68,7 +67,7 @@ class PromptForMoreTags(SophisticatedPrompt):
 
     @property
     def edit_part_type(self):
-        return 'tag'
+        return "tag"
 
     @property
     def edit_part_text(self):
@@ -76,21 +75,22 @@ class PromptForMoreTags(SophisticatedPrompt):
 
     @property
     def history_topic(self):
-        return 'meta_tag'
+        return "meta_tag"
 
     @property
     def type_request(self):
-        return _('Select <#tags> for “{}@{}”').format(
-            self.activity_name, self.category_name,
+        return _("Select <#tags> for “{}@{}”").format(
+            self.activity_name,
+            self.category_name,
         )
 
     @property
     def completion_hints(self):
         tags_hints = [
-            _('Type tag or choose from dropdown, and press ENTER to add.'),
-            _('To finish, press ENTER on a blank line (or press Ctrl-S).'),
-            _('To remove tags, press F8 to view tags that can be removed...'),
-            _('... and use arrow keys to choose a tag and ENTER to remove.'),
+            _("Type tag or choose from dropdown, and press ENTER to add."),
+            _("To finish, press ENTER on a blank line (or press Ctrl-S)."),
+            _("To remove tags, press F8 to view tags that can be removed..."),
+            _("... and use arrow keys to choose a tag and ENTER to remove."),
         ]
         tags_hints += super(PromptForMoreTags, self).completion_hints
         return tags_hints
@@ -120,7 +120,7 @@ class PromptForMoreTags(SophisticatedPrompt):
         for tag_name in self.ordered_tags:
             result = SophisticatedPrompt.FakeUsageResult(tag_name, None, None)
             results.append(SophisticatedPrompt.FakeUsageWrapper(result, None, None))
-        if self.sort_order == 'desc':
+        if self.sort_order == "desc":
             results.reverse()
         return results
 
@@ -256,17 +256,17 @@ class PromptForMoreTags(SophisticatedPrompt):
             return what_hint
 
         what_hint = _(
-            'Type tag and ENTER to add / Use F8 to remove tags / Ctrl-s to finish'
+            "Type tag and ENTER to add / Use F8 to remove tags / Ctrl-s to finish"
         ).format()
         return what_hint
 
     def prompt_recreate_filled(self, max_col=0):
-        fake_prompt = '{}{}'.format(
+        fake_prompt = "{}{}".format(
             self.session_prompt_prefix,
             self.session.layout.current_buffer.text,
         )
-        self.debug('fake_prompt: {}'.format(fake_prompt))
-        line_parts = [('', fake_prompt)]
+        self.debug("fake_prompt: {}".format(fake_prompt))
+        line_parts = [("", fake_prompt)]
         return line_parts
 
     # ***
@@ -280,14 +280,13 @@ class PromptForMoreTags(SophisticatedPrompt):
         # sets text='' but for some reason has to cursor_position=1. But not
         # here. Here the expectable cursor_position=0 works as expected. So
         # what gives, I don't understand.
-        event.current_buffer.text = ''
+        event.current_buffer.text = ""
         event.current_buffer.cursor_position = len(event.current_buffer.text)
         return True
 
     def handle_content_reset(self, event):
-
         # Clear the input text.
-        event.current_buffer.text = ''
+        event.current_buffer.text = ""
 
         # (lb): 2020-04-10: Removed some logic here. Code use to mess around
         # with the cursor, I think to reset the hint text above the prompt
@@ -316,11 +315,11 @@ class PromptForMoreTags(SophisticatedPrompt):
 
 # ***
 
-class TagCloudBottomBarArea(BottomBarArea):
-    """
-    """
 
-    TOGGLE_TYPES = [_('all'), _('act'), _('cat')]
+class TagCloudBottomBarArea(BottomBarArea):
+    """ """
+
+    TOGGLE_TYPES = [_("all"), _("act"), _("cat")]
     RESTRICT_ALL = 0
     RESTRICT_ACT = 1
     RESTRICT_CAT = 2
@@ -331,7 +330,7 @@ class TagCloudBottomBarArea(BottomBarArea):
 
     @property
     def say_types(self):
-        return _('Tags')
+        return _("Tags")
 
     @property
     def sort_binding_meta(self):
@@ -346,13 +345,13 @@ class TagCloudBottomBarArea(BottomBarArea):
         #       (lb): We don't use action callback, but do special check in
         #       fetch_completions, which is sorta lame (coupling) but it works.
         return KeyBond(
-            'f8',
-            _('selected'),
-            action='selected',
+            "f8",
+            _("selected"),
+            action="selected",
             highlight=self.meta_sort_highlight,
-            briefs=[_('selected')],
-            wordy=_('{types} you have selected'),
-            sort_order='asc',
+            briefs=[_("selected")],
+            wordy=_("{types} you have selected"),
+            sort_order="asc",
         )
 
     def init_hooks_filter(self):
@@ -362,7 +361,7 @@ class TagCloudBottomBarArea(BottomBarArea):
         # Option to toggle between filtering tags by acts, cats, or neither.
         self.filter_bindings = [
             KeyBond(
-                'f9',
+                "f9",
                 brief_scope,
                 self.toggle_scope,
                 briefs=TagCloudBottomBarArea.TOGGLE_TYPES,
@@ -378,27 +377,27 @@ class TagCloudBottomBarArea(BottomBarArea):
 
     def extend_bottom(self, _builder, dummy_section):
         parts = []
-        parts.append(('', '\n'))
+        parts.append(("", "\n"))
         self.extend_bottom_tagged(parts, dummy_section)
         return parts
 
     def extend_bottom_tagged(self, parts, dummy_section):
         if not self.prompt.ordered_tags:
             return
-        dummy_section.add_zinger(_('Selected: '))
+        dummy_section.add_zinger(_("Selected: "))
         self.extend_bottom_tag_names(dummy_section)
         self.extend_bottom_truncate_names(dummy_section)
         parts += dummy_section.parts
 
     def extend_bottom_tag_names(self, dummy_section):
         for tag_name in self.prompt.ordered_tags:
-            dummy_section.add_normal(_('#'))
+            dummy_section.add_normal(_("#"))
             dummy_section.add_zinger(tag_name)
-            dummy_section.add_normal(_(' '))
+            dummy_section.add_normal(_(" "))
 
     def extend_bottom_truncate_names(self, dummy_section):
         term_width = self.prompt.get_size()[1]
-        dummy_section.truncate(term_width, _(' <See all with [F8]>'))
+        dummy_section.truncate(term_width, _(" <See all with [F8]>"))
 
 
 class TagCloudValidator(Validator):
@@ -411,4 +410,3 @@ class TagCloudValidator(Validator):
     def validate(self, document):
         # A little coupled. User is doing something, so hide Ctrl-q hint.
         self.prompt.reset_timeouts()
-

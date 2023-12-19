@@ -16,4 +16,3 @@
 # repository (read the 'LICENSE' file), see <http://www.gnu.org/licenses/>.
 
 """Tests for ``dob_prompt/config`` modules."""
-

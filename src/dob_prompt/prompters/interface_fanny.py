@@ -18,7 +18,7 @@
 from .interface_bases import InterfaceBuilder, InterfaceSection
 
 __all__ = (
-    'BindingsBarBuilder',
+    "BindingsBarBuilder",
     # Private:
     #   'BindingsSection',
 )
@@ -26,9 +26,9 @@ __all__ = (
 
 # ***
 
+
 class BindingsSection(InterfaceSection):
-    """
-    """
+    """ """
 
     def __init__(self, bindings, plinth, colors=None, reserve_width=0):
         super(BindingsSection, self).__init__(colors=colors)
@@ -45,15 +45,12 @@ class BindingsSection(InterfaceSection):
         return self._plinth
 
     def __str__(self):
-        return (
-            '{} / # bindngs: {} / # plinth: {} / reserve_w: {} / max_w: {}'
-            .format(
-                super(BindingsSection, self).__str__(),
-                len(self.bindings),
-                len(self._plinth),
-                self.reserve_width,
-                self.max_width,
-            )
+        return "{} / # bindngs: {} / # plinth: {} / reserve_w: {} / max_w: {}".format(
+            super(BindingsSection, self).__str__(),
+            len(self.bindings),
+            len(self._plinth),
+            self.reserve_width,
+            self.max_width,
         )
 
     # ***
@@ -94,7 +91,7 @@ class BindingsSection(InterfaceSection):
     # ***
 
     def render(self, row):
-        getattr(self, 'render_row_{}'.format(row))()
+        getattr(self, "render_row_{}".format(row))()
         return self.parts
 
     def render_row_0(self):
@@ -122,18 +119,18 @@ class BindingsSection(InterfaceSection):
         if not binding.keycode:
             return
 
-        prefix = ' ' if idx > 0 else ''
+        prefix = " " if idx > 0 else ""
         self.add_normal(prefix)
         self.add_key_hint_parts(binding.key_hint, highlight)
-        self.add_normal(' ')
+        self.add_normal(" ")
 
     def add_key_hint_parts(self, key_hint, highlight):
         if highlight:
-            self.add_zinger('[')
+            self.add_zinger("[")
             self.add_lamron(key_hint)
-            self.add_zinger(']')
+            self.add_zinger("]")
         else:
-            keycode = '[{}]'.format(key_hint)
+            keycode = "[{}]".format(key_hint)
             self.add_lamron(keycode)
 
     def add_brief_hint(self, binding_or_brief, highlight=False):
@@ -149,15 +146,15 @@ class BindingsSection(InterfaceSection):
     # ***
 
     def render_pedestal_hint(self):
-        padded = ' {} '.format(self.plinth)
+        padded = " {} ".format(self.plinth)
         self.add_zinger(padded)
 
 
 # ***
 
+
 class BindingsBarBuilder(InterfaceBuilder):
-    """
-    """
+    """ """
 
     def __init__(self, colors):
         super(BindingsBarBuilder, self).__init__(colors=colors)
@@ -167,7 +164,10 @@ class BindingsBarBuilder(InterfaceBuilder):
 
     def add_bindings(self, bindings, plinth, reserve_width=0):
         section = BindingsSection(
-            bindings, plinth, reserve_width=reserve_width, colors=self.colors,
+            bindings,
+            plinth,
+            reserve_width=reserve_width,
+            colors=self.colors,
         )
         self.wire_linked_list(section)
         self.sections.append(section)
@@ -190,7 +190,7 @@ class BindingsBarBuilder(InterfaceBuilder):
             for section in self.sections:
                 self._parts += section.render(row)
             if row < (nrows - 1):
-                self._parts.append(('', '\n'))
+                self._parts.append(("", "\n"))
 
     def assemble_parts_footers(self):
         for footer in self.footers:
@@ -211,7 +211,7 @@ class BindingsBarBuilder(InterfaceBuilder):
     def first_line_len(self):
         line_width = 0
         for part in self.parts():
-            lines = part[1].split('\n', 2)
+            lines = part[1].split("\n", 2)
             line_width += len(lines[0])
             if len(lines) == 2:
                 break
@@ -220,4 +220,3 @@ class BindingsBarBuilder(InterfaceBuilder):
     def max_width(self):
         max_width = sum([section.max_width for section in self.sections])
         return max_width
-
