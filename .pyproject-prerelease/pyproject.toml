@@ -1050,19 +1050,19 @@ prompt-toolkit = "^3.0.5"
 
 # ActiveState/appdirs + Singleton (app-wide access w/out appname) + `mkdir -p`.
 #  https://github.com/doblabs/easy-as-pypi-appdirs#🛣
-easy-as-pypi-appdirs = { version = ">0", source = "testpypi" }
+easy-as-pypi-appdirs = { version = ">0", source = "testpypi", allow-prereleases = true }
 # Get-package-or-Git-version helper.
 #  https://github.com/tallybark/easy-as-pypi-getver
-easy-as-pypi-getver = { version = ">0", source = "testpypi" }
+easy-as-pypi-getver = { version = ">0", source = "testpypi", allow-prereleases = true }
 # Elapsed timedelta formatter, e.g., "1.25 days".
 # - Imports as `pedantic_timedelta`.
 # https://github.com/hotoffthehamster/human-friendly_pedantic-timedelta
-human-friendly_pedantic-timedelta = { version = ">0", source = "testpypi" }
+human-friendly_pedantic-timedelta = { version = ">0", source = "testpypi", allow-prereleases = true }
 
 # The heart of Hamster. (Ye olde `hamster-lib`).
 #  https://github.com/tallybark/nark
-nark = { version = ">0", source = "testpypi" }
+nark = { version = ">0", source = "testpypi", allow-prereleases = true }
 # The controller, config, and common output and error tossing code.
 #  https://github.com/tallybark/dob-bright
-dob-bright = { version = ">0", source = "testpypi" }
+dob-bright = { version = ">0", source = "testpypi", allow-prereleases = true }
 
