@@ -410,13 +410,13 @@ colorama = {version = "*", markers = "platform_system == \"Windows\""}
 
 [[package]]
 name = "click-hotoffthehamster"
-version = "7.8.2"
+version = "7.8.3"
 description = "Composable command line interface toolkit"
 optional = false
 python-versions = ">=3.8.1,<4.0.0"
 files = [
-    {file = "click_hotoffthehamster-7.8.2-py3-none-any.whl", hash = "sha256:4020ed5d9b0c0067ad69e867ac4deac4890af5b41dab34115e9f6ed8103676ec"},
-    {file = "click_hotoffthehamster-7.8.2.tar.gz", hash = "sha256:4d6c289fcdf4e8456d181f4e0a86f76a5e3c76c2390330f23459507335c87336"},
+    {file = "click_hotoffthehamster-7.8.3-py3-none-any.whl", hash = "sha256:6007f77fdb705376c1856ecb656e34a7b9bdb013c08836db2e960568ffe5b011"},
+    {file = "click_hotoffthehamster-7.8.3.tar.gz", hash = "sha256:601141eeb8110a4a48c28ac50429858d212e1123ae56d703a45327d22fd44185"},
 ]
 
 [package.dependencies]
@@ -637,13 +637,13 @@ files = [
 
 [[package]]
 name = "dob-bright"
-version = "1.2.6"
+version = "1.2.7"
 description = "journal and time tracker, supercharged for the terminal"
 optional = false
 python-versions = ">=3.8.1,<4.0.0"
 files = [
-    {file = "dob_bright-1.2.6-py3-none-any.whl", hash = "sha256:b265b311c0c07d75b26f3855afb572d7e3fde3113f43c4d49a7cfa22dba24ace"},
-    {file = "dob_bright-1.2.6.tar.gz", hash = "sha256:e5c88d9d95f7589763a20f9237e87a7b3e23e15742c553d5e6edbd60ca85330a"},
+    {file = "dob_bright-1.2.7-py3-none-any.whl", hash = "sha256:53afa14df03ad0c1c0736d5d87063a7c2592fdf4a0388a048bc5cf2d6221f744"},
+    {file = "dob_bright-1.2.7.tar.gz", hash = "sha256:5a14dfc72c1bd407796bb3756c9c1389b7071c9492d11c0eb05016a4cf8ff9b1"},
 ]
 
 [package.dependencies]
@@ -725,13 +725,13 @@ packaging = ">=20.9"
 
 [[package]]
 name = "easy-as-pypi-appdirs"
-version = "1.1.4"
+version = "1.1.5"
 description = "AppDirs overlay with mkdir -p side effect and Singleton access"
 optional = false
 python-versions = ">=3.8.1,<4.0.0"
 files = [
-    {file = "easy_as_pypi_appdirs-1.1.4-py3-none-any.whl", hash = "sha256:384168e4a2847f0434483cef2737cea400aaa7e214e7671229c7de38d544efa6"},
-    {file = "easy_as_pypi_appdirs-1.1.4.tar.gz", hash = "sha256:92bd24ed577451384a08118c438e8fa7d2e25a080c3ad439a7fb2dcd540c40b6"},
+    {file = "easy_as_pypi_appdirs-1.1.5-py3-none-any.whl", hash = "sha256:c8864244621f87f58450364ea0a32e1bfcd87b4f19aad3dbe25ba690123adea5"},
+    {file = "easy_as_pypi_appdirs-1.1.5.tar.gz", hash = "sha256:93cd97f2ecd33489d5277ec4a768ba5ae915afcaac412a3caea0c839a316c64a"},
 ]
 
 [package.dependencies]
@@ -742,13 +742,13 @@ readthedocs = ["sphinx (>=6.2.1,<7.0.0)", "sphinx (>=7.2.6,<8.0.0)", "sphinx-rtd
 
 [[package]]
 name = "easy-as-pypi-config"
-version = "1.0.1"
+version = "1.0.2"
 description = "Bootstrapped Config engine for your next Python CLI based on easy-as-pypi"
 optional = false
 python-versions = ">=3.8.1,<4.0.0"
 files = [
-    {file = "easy_as_pypi_config-1.0.1-py3-none-any.whl", hash = "sha256:a5089b1669013883057e9c079a4cd0aa547b52636a888463400c1bb9fbc2cf70"},
-    {file = "easy_as_pypi_config-1.0.1.tar.gz", hash = "sha256:7fa4e0d39725babb9b1cbe532097df70ca515e3dba0633d15d3efcec5040372b"},
+    {file = "easy_as_pypi_config-1.0.2-py3-none-any.whl", hash = "sha256:3c2d59a7c71147ab8b5f7db2c04bcbc663c0b46f6f15d26f69bd6f42933971f1"},
+    {file = "easy_as_pypi_config-1.0.2.tar.gz", hash = "sha256:c3fad34e35732dfd105b4efea439cca083997c53755b2f219dd2a8b6783b23ea"},
 ]
 
 [package.dependencies]
@@ -763,13 +763,13 @@ readthedocs = ["sphinx (>=6.2.1,<7.0.0)", "sphinx (>=7.2.6,<8.0.0)", "sphinx-rtd
 
 [[package]]
 name = "easy-as-pypi-getver"
-version = "1.0.3"
+version = "1.0.4"
 description = "Determine package version from what pip last installed and what Git says"
 optional = false
 python-versions = ">=3.8.1,<4.0.0"
 files = [
-    {file = "easy_as_pypi_getver-1.0.3-py3-none-any.whl", hash = "sha256:a91e873ad731b08dea82c86a16870d8a8505ed9f8cacf24246ffe6ab6239f9da"},
-    {file = "easy_as_pypi_getver-1.0.3.tar.gz", hash = "sha256:1db55be305c1c88cf527342b47fe309a525cc4e1a25612aa0bc08b6074c714dd"},
+    {file = "easy_as_pypi_getver-1.0.4-py3-none-any.whl", hash = "sha256:91026e661b2f1b7189cbeff30d18dfe839a586fcc905c7ec290cd564e4d4767c"},
+    {file = "easy_as_pypi_getver-1.0.4.tar.gz", hash = "sha256:8c57328324d97f08d1a96417151b457b691cc877c0604c4f9871fe4b5b262d6e"},
 ]
 
 [package.extras]
@@ -777,13 +777,13 @@ readthedocs = ["sphinx (>=6.2.1,<7.0.0)", "sphinx (>=7.2.6,<8.0.0)", "sphinx-rtd
 
 [[package]]
 name = "easy-as-pypi-termio"
-version = "1.0.2"
+version = "1.0.3"
 description = "Click CLI conveniences for your next Python CLI based on easy-as-pypi"
 optional = false
 python-versions = ">=3.8.1,<4.0.0"
 files = [
-    {file = "easy_as_pypi_termio-1.0.2-py3-none-any.whl", hash = "sha256:b54e3b981c762e80a29200e9d7effee0f500e4a3732b3d9973b833ff99fbaeeb"},
-    {file = "easy_as_pypi_termio-1.0.2.tar.gz", hash = "sha256:ecc4d18eb5583eb2d9f399098411124e1c4f3df67a684bc4a652ae8f534adbef"},
+    {file = "easy_as_pypi_termio-1.0.3-py3-none-any.whl", hash = "sha256:2bdae273ed58cdda581e66ae6b25e52cb7f065fccb5ee0f5f8a79ed8f7c4a3e7"},
+    {file = "easy_as_pypi_termio-1.0.3.tar.gz", hash = "sha256:3d7756ebc833a5e31ff75ef1a816038c0c3836639107b9129db42ded9e2a465d"},
 ]
 
 [package.dependencies]
@@ -1462,13 +1462,13 @@ files = [
 
 [[package]]
 name = "nark"
-version = "3.2.5"
+version = "3.2.6"
 description = "Back end framework for journaling and time tracking apps (like `dob`!)"
 optional = false
 python-versions = ">=3.8.1,<4.0.0"
 files = [
-    {file = "nark-3.2.5-py3-none-any.whl", hash = "sha256:b5383d8e2882263b7a6fbfdb9bf2ace6c595c309901e1e23de051a1324cb5b28"},
-    {file = "nark-3.2.5.tar.gz", hash = "sha256:3c10f1fd867af3ad3c8d89c959d0ccc1491f98378ffde7746bbe80170f30d110"},
+    {file = "nark-3.2.6-py3-none-any.whl", hash = "sha256:d24add9b104e569fc2811342767e97acee363da0ab0193d6d9163c058eb55879"},
+    {file = "nark-3.2.6.tar.gz", hash = "sha256:33bd71b6f11c402e06ffcbc946a6ddb08d946d0c7da4ab36f3cace88ee613012"},
 ]
 
 [package.dependencies]
