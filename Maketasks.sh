@@ -486,7 +486,7 @@ make_pyproject_prerelease () {
   #   - REFER: https://github.com/python-poetry/poetry/issues/5621
   awk ' \
     match($0, /^('${concat_pjs}')\s*=\s*"([<>=^]{1,2}\s*[0-9]+[^"]*)"/, matches) { \
-      print matches[1] " = { version = \"" matches[2] "\", source = \"testpypi\" }"; \
+      print matches[1] " = { version = \"" matches[2] "\", source = \"testpypi\", allow-prereleases = true }"; \
       next; \
     } 1 \
   ' "pyproject.toml" >> "${PYPROJECT_PRERELEASE_DIR}/pyproject.toml"
