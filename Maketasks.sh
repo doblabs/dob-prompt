@@ -32,6 +32,10 @@ make_develop () {
 
   _pyenv_prepare_shell "${VENV_PYVER}"
 
+  # Support `workon` from https://github.com/landonb/virtualenvwrapper
+  # from all pyenv envs.
+  pip install virtualenvwrapper
+
   # IGNOR: This fcn. sets VENV_CREATED
   _venv_manage_and_activate "${VENV_NAME}" "${VENV_ARGS}" "" "${VENV_NAME}"
 
