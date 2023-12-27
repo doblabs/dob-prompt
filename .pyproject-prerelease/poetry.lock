@@ -651,13 +651,13 @@ files = [
 
 [[package]]
 name = "dob-bright"
-version = "1.2.8a1"
+version = "1.2.9a1"
 description = "journal and time tracker, supercharged for the terminal"
 optional = false
 python-versions = ">=3.8.1,<4.0.0"
 files = [
-    {file = "dob_bright-1.2.8a1-py3-none-any.whl", hash = "sha256:c393679fe956d32e8f67efefb0c60a063c61e3387f509c37d6b4693f7050b4d1"},
-    {file = "dob_bright-1.2.8a1.tar.gz", hash = "sha256:a86c538ff1512e700c14e4c5c5182f001ebeed3d4188fc618a8de94566e75f78"},
+    {file = "dob_bright-1.2.9a1-py3-none-any.whl", hash = "sha256:ad09ec73ee954bd104091f12725280ef460be3928ebd2edac60ce2b741425ff2"},
+    {file = "dob_bright-1.2.9a1.tar.gz", hash = "sha256:a4c786ed5db68885a89f832ad205831f4b43f738de335b1e18b85cdcb97c12cd"},
 ]
 
 [package.dependencies]
@@ -744,13 +744,13 @@ packaging = ">=20.9"
 
 [[package]]
 name = "easy-as-pypi-appdirs"
-version = "1.1.5a2"
+version = "1.1.6a1"
 description = "AppDirs overlay with mkdir -p side effect and Singleton access"
 optional = false
 python-versions = ">=3.8.1,<4.0.0"
 files = [
-    {file = "easy_as_pypi_appdirs-1.1.5a2-py3-none-any.whl", hash = "sha256:a9c8c91d849854b2dde12d66d958cf15bba301cb137b134e933f761d43ddffc9"},
-    {file = "easy_as_pypi_appdirs-1.1.5a2.tar.gz", hash = "sha256:4b8883c6d5c5849755cd2e382a8d077fd7e77d1ba1948bd23beca13c606943d1"},
+    {file = "easy_as_pypi_appdirs-1.1.6a1-py3-none-any.whl", hash = "sha256:6e785000b29a17d813c4b6611b3718bfecef827a79695516a4790ed97eef718f"},
+    {file = "easy_as_pypi_appdirs-1.1.6a1.tar.gz", hash = "sha256:8d80e23d94cd881232e21e27c931a87fb63fbde3f0db95a18192f7c787ec06b7"},
 ]
 
 [package.dependencies]
@@ -787,13 +787,13 @@ readthedocs = ["sphinx (>=6.2.1,<7.0.0)", "sphinx (>=7.2.6,<8.0.0)", "sphinx-rtd
 
 [[package]]
 name = "easy-as-pypi-getver"
-version = "1.0.4a2"
+version = "1.0.5a1"
 description = "Determine package version from what pip last installed and what Git says"
 optional = false
 python-versions = ">=3.8.1,<4.0.0"
 files = [
-    {file = "easy_as_pypi_getver-1.0.4a2-py3-none-any.whl", hash = "sha256:0a4b9da1dd4b16e9d1e2f872d468e520ae0068cad3adee81a93971ff7a0cf1e0"},
-    {file = "easy_as_pypi_getver-1.0.4a2.tar.gz", hash = "sha256:f5cd5354294098734372a0bbd706c418cf66b910015677869175a5f1aaade9c9"},
+    {file = "easy_as_pypi_getver-1.0.5a1-py3-none-any.whl", hash = "sha256:5aaa7f516d8542cb068718c94e939217dc7f4c82028c7796ac391a6e002567be"},
+    {file = "easy_as_pypi_getver-1.0.5a1.tar.gz", hash = "sha256:a2064b67f06cca394280cb9e32c4913730e9ba0c90b3d902afd859547abe3af3"},
 ]
 
 [package.extras]
@@ -1511,13 +1511,13 @@ files = [
 
 [[package]]
 name = "nark"
-version = "3.2.6a4"
+version = "3.2.7a1"
 description = "Back end framework for journaling and time tracking apps (like `dob`!)"
 optional = false
 python-versions = ">=3.8.1,<4.0.0"
 files = [
-    {file = "nark-3.2.6a4-py3-none-any.whl", hash = "sha256:b504bde19bea7af1016b371a4abee97a414548d1bb60f3d84a0640d5d751bb30"},
-    {file = "nark-3.2.6a4.tar.gz", hash = "sha256:e29745cb376f7d4c562ba6788487742059ba5c09dc1d574b200fb08b4cf44965"},
+    {file = "nark-3.2.7a1-py3-none-any.whl", hash = "sha256:f30b7971834214a2825715318b50ab76e885a03bf0ce443e87c8b2adf7a521fb"},
+    {file = "nark-3.2.7a1.tar.gz", hash = "sha256:c76906325f8e36b6028afaeab62a3e886e67667a12b86cf234a250f67e206af4"},
 ]
 
 [package.dependencies]
